@@ -1,0 +1,8 @@
+{
+  "name": "SnapMuse",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "4b4a91c9"
+}
