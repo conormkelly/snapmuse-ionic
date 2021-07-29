@@ -20,8 +20,8 @@ const routes: Routes = [
   {
     path: 'posts/:id',
     loadChildren: () =>
-      import('./view-message/view-message.module').then(
-        (m) => m.ViewMessagePageModule
+      import('./post-detail/post-detail.module').then(
+        (m) => m.PostDetailPageModule
       ),
   },
 ];

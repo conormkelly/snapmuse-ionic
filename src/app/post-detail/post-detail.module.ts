@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ViewMessagePage } from './view-message.page';
+import { PostDetailPage } from './post-detail.page';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewMessagePageRoutingModule } from './view-message-routing.module';
+import { PostDetailPageRoutingModule } from './post-detail-routing.module';
 import { CommentComponent } from '../comment/comment.component';
 
 @NgModule({
@@ -13,8 +13,8 @@ import { CommentComponent } from '../comment/comment.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewMessagePageRoutingModule,
+    PostDetailPageRoutingModule,
   ],
-  declarations: [ViewMessagePage, CommentComponent],
+  declarations: [PostDetailPage, CommentComponent],
 })
-export class ViewMessagePageModule {}
+export class PostDetailPageModule {}
