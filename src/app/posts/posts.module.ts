@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
-import { HomePage } from './home.page';
-import { HomePageRoutingModule } from './home-routing.module';
+import { PostsPage } from './posts.page';
+import { PostsPageRoutingModule } from './posts-routing.module';
 import { MessageComponentModule } from '../message/message.module';
 
 @NgModule({
@@ -13,8 +13,8 @@ import { MessageComponentModule } from '../message/message.module';
     FormsModule,
     IonicModule,
     MessageComponentModule,
-    HomePageRoutingModule
+    PostsPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [PostsPage]
 })
-export class HomePageModule {}
+export class PostsPageModule {}

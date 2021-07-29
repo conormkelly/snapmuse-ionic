@@ -3,19 +3,19 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { MessageComponentModule } from '../message/message.module';
 
-import { HomePage } from './home.page';
+import { PostsPage } from './posts.page';
 
-describe('HomePage', () => {
-  let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
+describe('PostsPage', () => {
+  let component: PostsPage;
+  let fixture: ComponentFixture<PostsPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePage ],
+      declarations: [ PostsPage ],
       imports: [IonicModule.forRoot(), MessageComponentModule, RouterModule.forRoot([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    fixture = TestBed.createComponent(PostsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
