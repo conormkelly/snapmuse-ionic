@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{message.title}}</ion-title>
+    <ion-title>{{post.title}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button
         [text]="getBackButtonText()"
@@ -10,9 +10,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="message">
+<ion-content [fullscreen]="true" *ngIf="post">
   <div class="image-container">
-    <ion-img class="full-image" [src]="message.imageUrl"></ion-img>
+    <ion-img class="full-image" [src]="post.imageUrl"></ion-img>
   </div>
 
   <!-- <ion-item>

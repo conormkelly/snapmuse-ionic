@@ -5,14 +5,14 @@ import { FormsModule } from '@angular/forms';
 
 import { PostsPage } from './posts.page';
 import { PostsPageRoutingModule } from './posts-routing.module';
-import { MessageComponentModule } from '../message/message.module';
+import { PostComponentModule } from '../post/post.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MessageComponentModule,
+    PostComponentModule,
     PostsPageRoutingModule
   ],
   declarations: [PostsPage]

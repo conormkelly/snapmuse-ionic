@@ -1,16 +1,16 @@
 <ion-item
-  *ngIf="message"
-  [routerLink]="'/message/' + message.id"
+  *ngIf="post"
+  [routerLink]="'/posts/' + post.id"
   [detail]="false"
 >
   <ion-thumbnail class="image-holder" slot="start">
-    <ion-img class="image-thumbnail" [src]="message.imageUrl"></ion-img>
+    <ion-img class="image-thumbnail" [src]="post.imageUrl"></ion-img>
   </ion-thumbnail>
   <ion-label class="ion-text-wrap">
     <h2>
-      {{ message.title }}
+      {{ post.title }}
       <span class="date">
-        <ion-note>{{ message.date }}</ion-note>
+        <ion-note>{{ post.date }}</ion-note>
         <ion-icon
           name="chevron-forward"
           size="small"

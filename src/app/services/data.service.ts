@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 
-export interface Message {
+export interface Post {
   title: string;
   date: string;
   id: number;
@@ -20,7 +20,7 @@ export interface AudioData {
 })
 export class DataService {
   public audio: HTMLAudioElement;
-  public messages: Message[] = [
+  public posts: Post[] = [
     {
       title: 'Train',
       date: '05/07/2021',
@@ -93,8 +93,8 @@ export class DataService {
 
   constructor() {}
 
-  public getMessages(): Message[] {
-    return this.messages;
+  public getPosts(): Post[] {
+    return this.posts;
   }
 
   public getComments() {
@@ -119,7 +119,7 @@ export class DataService {
     return this.audioSubject.asObservable();
   }
 
-  public getMessageById(id: number): Message {
-    return this.messages[id];
+  public getPostById(id: number): Post {
+    return this.posts[id];
   }
 }

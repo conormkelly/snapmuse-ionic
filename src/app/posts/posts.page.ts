@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService, Message } from '../services/data.service';
+import { DataService, Post } from '../services/data.service';
 
 @Component({
   selector: 'app-posts',
@@ -15,8 +15,8 @@ export class PostsPage {
     }, 3000);
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  getPosts(): Post[] {
+    return this.data.getPosts();
   }
 
 }

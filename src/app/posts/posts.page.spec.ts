@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { MessageComponentModule } from '../message/message.module';
+import { PostComponentModule } from '../post/post.module';
 
 import { PostsPage } from './posts.page';
 
@@ -12,7 +12,7 @@ describe('PostsPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PostsPage ],
-      imports: [IonicModule.forRoot(), MessageComponentModule, RouterModule.forRoot([])]
+      imports: [IonicModule.forRoot(), PostComponentModule, RouterModule.forRoot([])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PostsPage);
