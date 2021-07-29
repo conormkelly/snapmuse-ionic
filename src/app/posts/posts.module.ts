@@ -5,16 +5,16 @@ import { FormsModule } from '@angular/forms';
 
 import { PostsPage } from './posts.page';
 import { PostsPageRoutingModule } from './posts-routing.module';
-import { PostComponentModule } from '../post/post.module';
+import { PostItemComponentModule } from '../post-item/post-item.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PostComponentModule,
-    PostsPageRoutingModule
+    PostItemComponentModule,
+    PostsPageRoutingModule,
   ],
-  declarations: [PostsPage]
+  declarations: [PostsPage],
 })
 export class PostsPageModule {}

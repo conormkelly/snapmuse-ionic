@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PostComponent } from './post.component';
+import { PostItemComponent } from './post-item.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, IonicModule, RouterModule],
-  declarations: [PostComponent],
-  exports: [PostComponent]
+  declarations: [PostItemComponent],
+  exports: [PostItemComponent]
 })
-export class PostComponentModule {}
+export class PostItemComponentModule {}
