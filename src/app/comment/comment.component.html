@@ -1,0 +1,33 @@
+<ion-item
+  *ngIf="comment"
+  [color]="isPlaying() ? 'light' : undefined"
+  (click)="onPlay()"
+>
+  <ion-label class="ion-text-wrap">
+    <h2>
+      {{ comment.title }} -
+      <span class="date">
+        <ion-note>{{ comment.user }}</ion-note>
+      </span>
+    </h2>
+  </ion-label>
+
+  <ion-icon
+    (click)="onDownload()"
+    class="download-icon"
+    color="primary"
+    name="cloud-download-outline"
+    size="medium"
+  ></ion-icon>
+
+  <ion-icon
+    class="heart-icon"
+    [color]="comment.isLiked ? 'danger' : 'secondary'"
+    [name]="comment.isLiked ? 'heart' : 'heart-outline'"
+    size="medium"
+  ></ion-icon>
+
+  <ion-badge class="like-count-badge" color="light" size="large" slot="end">{{
+    comment.likeCount
+  }}</ion-badge>
+</ion-item>

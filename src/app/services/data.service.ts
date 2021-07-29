@@ -1,80 +1,122 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface Message {
-  fromName: string;
-  subject: string;
+  title: string;
   date: string;
   id: number;
-  read: boolean;
+  imageUrl: string;
+}
+
+export interface AudioData {
+  audio: HTMLAudioElement;
+  user: string;
+  title: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
+  public audio: HTMLAudioElement;
   public messages: Message[] = [
     {
-      fromName: 'Matt Chorsey',
-      subject: 'New event: Trip to Vegas',
-      date: '9:32 AM',
+      title: 'Train',
+      date: '05/07/2021',
       id: 0,
-      read: false
+      imageUrl:
+        'https://images.pexels.com/photos/962985/pexels-photo-962985.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     },
     {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
-      date: '6:12 AM',
+      title: 'Glass Roof',
+      date: '28/06/2021',
       id: 1,
-      read: false
+      imageUrl:
+        'https://images.pexels.com/photos/573892/pexels-photo-573892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     },
     {
-      fromName: 'Jordan Firth',
-      subject: 'Report Results',
-      date: '4:55 AM',
+      title: 'Bokeh',
+      date: '21/06/2021',
       id: 2,
-      read: false
+      imageUrl:
+        'https://images.pexels.com/photos/691865/pexels-photo-691865.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     },
     {
-      fromName: 'Bill Thomas',
-      subject: 'The situation',
-      date: 'Yesterday',
+      title: 'Body Of Water',
+      date: '14/06/2021',
       id: 3,
-      read: false
+      imageUrl:
+        'https://images.pexels.com/photos/1072842/pexels-photo-1072842.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     },
     {
-      fromName: 'Joanne Pollan',
-      subject: 'Updated invitation: Swim lessons',
-      date: 'Yesterday',
+      title: 'Rise',
+      date: '07/06/2021',
       id: 4,
-      read: false
+      imageUrl:
+        'https://images.pexels.com/photos/1668911/pexels-photo-1668911.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     },
     {
-      fromName: 'Andrea Cornerston',
-      subject: 'Last minute ask',
-      date: 'Yesterday',
+      title: 'Pine',
+      date: '01/06/2021',
       id: 5,
-      read: false
+      imageUrl:
+        'https://images.pexels.com/photos/8552529/pexels-photo-8552529.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
     },
-    {
-      fromName: 'Moe Chamont',
-      subject: 'Family Calendar - Version 1',
-      date: 'Last Week',
-      id: 6,
-      read: false
-    },
-    {
-      fromName: 'Kelly Richardson',
-      subject: 'Placeholder Headhots',
-      date: 'Last Week',
-      id: 7,
-      read: false
-    }
   ];
 
-  constructor() { }
+  public comments: any[] = [
+    {
+      title: 'My Song',
+      user: 'XyzMan',
+      url: 'https://snapmuse-audio.s3.eu-west-1.amazonaws.com/6102d4542f873c407cf8a4be',
+      isLiked: false,
+      likeCount: 0,
+    },
+    {
+      title: 'Another Entry',
+      user: 'collster5000',
+      url: 'https://snapmuse-audio.s3.eu-west-1.amazonaws.com/6102d4542f873c407cf8a4be',
+      isLiked: true,
+      likeCount: 3,
+    },
+    {
+      title: 'Testing',
+      user: 'ConorK',
+      url: 'https://snapmuse-audio.s3.eu-west-1.amazonaws.com/6102d4542f873c407cf8a4be',
+      isLiked: false,
+      likeCount: 2,
+    },
+  ];
+
+  public audioSubject: Subject<AudioData> = new Subject();
+
+  constructor() {}
 
   public getMessages(): Message[] {
     return this.messages;
+  }
+
+  public getComments() {
+    return this.comments;
+  }
+
+  public loadAudio({ url, user, title }) {
+    if (!this.audio) {
+      this.audio = new Audio();
+    }
+    if (this.audio.src !== url) {
+      this.audio.src = url;
+      this.audio.onloadeddata = () => {
+        this.audioSubject.next({ audio: this.audio, user, title });
+        this.audio.play();
+      };
+      this.audio.load();
+    }
+  }
+
+  public getAudioSubscription(): Observable<AudioData> {
+    return this.audioSubject.asObservable();
   }
 
   public getMessageById(id: number): Message {

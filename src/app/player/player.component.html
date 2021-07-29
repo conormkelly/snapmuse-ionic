@@ -1,0 +1,69 @@
+<ion-toolbar *ngIf="audio" color="primary" padding>
+  <ion-grid>
+    <ion-row id="media-controls">
+      <!-- Back -->
+      <!-- <ion-col>
+        <ion-button fill="clear">
+          <ion-icon color="secondary" name="play-back-outline"></ion-icon>
+        </ion-button>
+      </ion-col> -->
+
+      <ion-col size="2">
+        <ion-thumbnail>
+          <ion-img
+            class="image-thumbnail"
+            src="https://images.pexels.com/photos/962985/pexels-photo-962985.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          ></ion-img>
+        </ion-thumbnail>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-row class="song-title">{{ title }}</ion-row>
+        <ion-row class="song-user">{{ user }}</ion-row>
+      </ion-col>
+
+      <!-- Menu -->
+      <ion-col size="2">
+        <ion-button (click)="onPresentModal()" fill="clear">
+          <ion-icon color="secondary" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <!-- Like -->
+      <ion-col size="2">
+        <ion-button (click)="onToggleLike()" [disabled]="!audio" fill="clear">
+          <ion-icon
+            class="heart-icon"
+            [color]="isLiked ? 'danger' : 'secondary'"
+            [name]="isLiked ? 'heart' : 'heart-outline'" 
+            size="large"
+          ></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="2">
+        <!-- Play -->
+        <ion-button
+          *ngIf="!isPlaying"
+          [disabled]="!audio"
+          (click)="onPlay()"
+          fill="clear"
+        >
+          <ion-icon color="secondary" size="large" name="play"></ion-icon>
+        </ion-button>
+
+        <!-- Pause -->
+        <ion-button *ngIf="isPlaying" (click)="onPause()" fill="clear">
+          <ion-icon color="secondary" size="large" name="pause"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <!-- Forward -->
+      <!-- <ion-col>
+        <ion-button fill="clear">
+          <ion-icon color="secondary" name="play-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>

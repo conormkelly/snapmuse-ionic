@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="text-center">
+    <ion-row>
+      <ion-col>
+        <ion-title class="snapmuse-title"> SnapMuse </ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="logo-container">
+        <ion-img class="snapmuse-logo" src="assets/logo.svg"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <p>Your visual inspiration.</p>
+
+  <ion-grid class="margin-top">
+    <ion-row>
+      <ion-col>
+        <ion-button routerLink="/" expand="block">Login</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block">Register</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

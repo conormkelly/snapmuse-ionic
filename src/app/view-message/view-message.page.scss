@@ -38,3 +38,22 @@ h1 {
 p {
   line-height: 22px;
 }
+
+.image-container {
+  max-height: 60%;
+  display: flex;
+}
+
+.full-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+.audio-player {
+  width: 100%;
+  border-radius: none !important;
+}
+
+.upload-button {
+  padding-bottom: 0;
+}

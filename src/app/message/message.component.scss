@@ -40,17 +40,12 @@ ion-item ion-note.md {
   margin-right: 14px;
 }
 
-.dot {
-  display: block;
-  height: 12px;
-  width: 12px;
-  border-radius: 50%;
-  align-self: start;
-  margin: 16px 10px 16px 16px;
+.image-thumbnail {
+  border-radius: 2rem;
 }
 
-.dot-unread {
-  background: var(--ion-color-primary);
+.image-holder {
+  margin-left: 1rem;
 }
 
 ion-footer ion-title {

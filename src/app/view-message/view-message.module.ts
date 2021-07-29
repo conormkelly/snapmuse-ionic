@@ -6,14 +6,15 @@ import { ViewMessagePage } from './view-message.page';
 import { IonicModule } from '@ionic/angular';
 
 import { ViewMessagePageRoutingModule } from './view-message-routing.module';
+import { CommentComponent } from '../comment/comment.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewMessagePageRoutingModule
+    ViewMessagePageRoutingModule,
   ],
-  declarations: [ViewMessagePage]
+  declarations: [ViewMessagePage, CommentComponent],
 })
 export class ViewMessagePageModule {}
