@@ -1,21 +1,41 @@
+/* eslint-disable no-underscore-dangle */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Post } from '../models/Post';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
   private httpHeader = {
+    // eslint-disable-next-line
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   private apiBaseUrl = 'http://localhost:3000';
 
+  private posts: Post[] = [];
+  private postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject(
+    this.posts
+  );
+
   constructor(private http: HttpClient) {}
+
+  getPostsListener() {
+    return this.postsSubject.asObservable();
+  }
+
+  getPostById(id: string) {
+    return this.posts.find((p) => (p._id === id));
+  }
 
   getAllPosts() {
     const url = `${this.apiBaseUrl}/posts`;
-    return this.http.get<any>(url, this.httpHeader);
+    this.http.get<Post[]>(url, this.httpHeader).subscribe((posts) => {
+      this.posts = posts;
+      this.postsSubject.next(this.posts);
+    });
   }
 
   getComments(postId: string) {

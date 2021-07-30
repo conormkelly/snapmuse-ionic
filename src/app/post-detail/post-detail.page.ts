@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService, Post } from '../services/data.service';
+import { DataService } from '../services/data.service';
+import { PostsService } from '../services/posts.service';
+import { Post } from '../models/Post';
 
 @Component({
   selector: 'app-post-detail',
@@ -12,16 +14,13 @@ export class PostDetailPage implements OnInit {
 
   constructor(
     private data: DataService,
+    private postsService: PostsService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.post = this.data.getPostById(parseInt(id, 10));
-
-    // this.audio$ = this.data.getAudioSubscription().subscribe((audio) => {
-    //   this.audio = audio;
-    // });
+    this.post = this.postsService.getPostById(id);
   }
 
   getBackButtonText() {
@@ -30,6 +29,7 @@ export class PostDetailPage implements OnInit {
     return mode === 'ios' ? 'Inbox' : '';
   }
 
+  // TODO: refactor to remove data service
   getComments() {
     return this.data.getComments();
   }

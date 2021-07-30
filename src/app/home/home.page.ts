@@ -28,6 +28,6 @@ export class HomePage implements OnInit {
   }
 
   onRegister() {
-    console.log('Register clicked!');
+    console.log('TODO: Register clicked!');
   }
 }
