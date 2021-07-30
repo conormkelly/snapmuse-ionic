@@ -20,7 +20,9 @@ export class PostDetailPage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.post = this.postsService.getPostById(id);
+    this.postsService.getPostById(id).then((post) => {
+      this.post = post;
+    });
   }
 
   getBackButtonText() {

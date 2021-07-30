@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{post.title}}</ion-title>
+    <ion-title *ngIf="post">{{post.title}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button
         [text]="getBackButtonText()"
@@ -28,7 +28,7 @@
   </div>
 
   <div class="ion-padding">
-    <ion-list>
+    <ion-list *ngIf="post">
       <app-comment *ngFor="let comment of getComments()" [comment]="comment"></app-comment>
     </ion-list>
   </div>

@@ -26,8 +26,20 @@ export class PostsService {
     return this.postsSubject.asObservable();
   }
 
-  getPostById(id: string) {
-    return this.posts.find((p) => (p._id === id));
+  // TODO: handle error case
+  async getPostById(id: string) {
+    let post = this.posts.find((p) => p._id === id);
+    if (!post) {
+      const response = await this.http
+        .get<any>(`${this.apiBaseUrl}/posts/${id}`)
+        .toPromise();
+      if (response.success) {
+        post = response.data;
+      } else {
+        post = null;
+      }
+    }
+    return post;
   }
 
   getAllPosts() {
