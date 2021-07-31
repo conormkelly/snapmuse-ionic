@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataService } from '../services/data.service';
 import { PostsService } from '../services/posts.service';
 import { Post } from '../models/Post';
 
@@ -10,15 +9,17 @@ import { Post } from '../models/Post';
   styleUrls: ['posts.page.scss'],
 })
 export class PostsPage implements OnInit, OnDestroy {
+  posts: Post[] = [];
   private $postSubscription: Subscription;
-  private posts: Post[] = [];
 
-  constructor(private data: DataService, private postsService: PostsService) {}
+  constructor(private postsService: PostsService) {}
 
   ngOnInit() {
     this.$postSubscription = this.postsService
       .getPostsListener()
-      .subscribe((posts) => (this.posts = posts));
+      .subscribe((posts) => {
+        this.posts = posts;
+      });
     this.postsService.getAllPosts();
   }
 
@@ -27,8 +28,8 @@ export class PostsPage implements OnInit, OnDestroy {
   }
 
   refresh(ev) {
-    setTimeout(() => {
+    this.postsService.getAllPosts().then((wasSuccessful) => {
       ev.detail.complete();
-    }, 3000);
+    });
   }
 }

@@ -42,12 +42,18 @@ export class PostsService {
     return post;
   }
 
-  getAllPosts() {
-    const url = `${this.apiBaseUrl}/posts`;
-    this.http.get<Post[]>(url, this.httpHeader).subscribe((posts) => {
+  async getAllPosts() {
+    try {
+      const url = `${this.apiBaseUrl}/posts`;
+      const posts = await this.http
+        .get<Post[]>(url, this.httpHeader)
+        .toPromise();
       this.posts = posts;
       this.postsSubject.next(this.posts);
-    });
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   getComments(postId: string) {
