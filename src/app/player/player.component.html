@@ -9,7 +9,7 @@
       </ion-col> -->
 
       <ion-col size="2">
-        <ion-thumbnail>
+        <ion-thumbnail (click)="onClickThumbnail()">
           <ion-img
             class="image-thumbnail"
             [src]="post.imageSrc.small"

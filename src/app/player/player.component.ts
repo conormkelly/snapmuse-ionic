@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
@@ -8,6 +9,7 @@ import { AudioService } from '../services/audio.service';
 
 import { Comment } from '../models/Comment';
 import { Post } from '../models/Post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player',
@@ -24,6 +26,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     private modalService: ModalController,
+    private router: Router,
     private audioService: AudioService
   ) {}
 
@@ -34,6 +37,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.audio = audioData.audio;
         this.comment = audioData.comment;
         this.post = audioData.post;
+        this.isPlaying = true;
       });
   }
 
@@ -49,6 +53,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   onToggleLike() {
     this.isLiked = !this.isLiked;
+  }
+
+  onClickThumbnail() {
+    const postDetailUrl = `/posts/${this.post._id}`;
+    if (this.router.url !== postDetailUrl) {
+      this.router.navigateByUrl(postDetailUrl);
+    }
   }
 
   ngOnDestroy() {
