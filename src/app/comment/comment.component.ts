@@ -1,6 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, Input, OnInit } from '@angular/core';
 import { AudioService } from '../services/audio.service';
-import { DataService } from '../services/data.service';
+
+import { PostsService } from '../services/posts.service';
+import { Comment } from '../models/Comment';
+
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-comment',
@@ -8,9 +13,13 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./comment.component.scss'],
 })
 export class CommentComponent implements OnInit {
-  @Input() comment: any;
+  @Input() comment: Comment;
+  downloadState = 'none';
 
-  constructor(private audioService: AudioService) {}
+  constructor(
+    private audioService: AudioService,
+    private postsService: PostsService
+  ) {}
 
   ngOnInit() {}
 
@@ -18,8 +27,15 @@ export class CommentComponent implements OnInit {
     this.audioService.loadAudio(this.comment);
   }
 
-  onDownload() {
-    console.log('TODO: Implement me!');
+  async onDownload() {
+    if (this.downloadState === 'none') {
+      const post = await this.postsService.getPostById(this.comment.postId);
+      this.downloadState = 'inProgress';
+      this.audioService.downloadFile(this.comment._id).subscribe((blob) => {
+        this.downloadState = 'complete';
+        saveAs(blob, `${post.title}-${this.comment.username}.mp3`);
+      });
+    }
   }
 
   isPlaying() {
