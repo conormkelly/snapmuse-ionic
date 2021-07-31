@@ -5,7 +5,9 @@ import { SongDetailComponent } from '../song-detail/song-detail.component';
 
 import { Subscription } from 'rxjs';
 import { AudioService } from '../services/audio.service';
-import { DataService } from '../services/data.service';
+
+import { Comment } from '../models/Comment';
+import { Post } from '../models/Post';
 
 @Component({
   selector: 'app-player',
@@ -13,16 +15,15 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-  public audio: HTMLAudioElement;
-  public user: string;
-  public title: string;
   public audio$: Subscription;
+  public audio: HTMLAudioElement;
+  public comment: Comment;
+  public post: Post;
   public isPlaying = false;
   public isLiked = false;
 
   constructor(
     private modalService: ModalController,
-    private data: DataService,
     private audioService: AudioService
   ) {}
 
@@ -31,8 +32,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
       .getAudioSubscription()
       .subscribe((audioData) => {
         this.audio = audioData.audio;
-        this.user = audioData.user;
-        this.title = audioData.title;
+        this.comment = audioData.comment;
+        this.post = audioData.post;
       });
   }
 

@@ -1,22 +1,19 @@
 <ion-item
-  *ngIf="comment"
+  *ngIf="comment && comment.recordingSrc"
   [color]="isPlaying() ? 'light' : undefined"
   (click)="onPlay()"
+  class="audio-comment"
 >
   <ion-label class="ion-text-wrap">
-    <h2>
-      {{ comment.title }} -
-      <span class="date">
-        <ion-note>{{ comment.user }}</ion-note>
-      </span>
-    </h2>
+    <p class="comment-text">{{ comment.text }}</p>
+    <h3 class="username-text">{{ comment.username }}</h3>
   </ion-label>
 
   <ion-icon
     (click)="onDownload()"
     class="download-icon"
     color="primary"
-    name="cloud-download-outline"
+    [name]="comment.recordingSrc ? 'cloud-download-outline' : undefined"
     size="medium"
   ></ion-icon>
 
@@ -26,4 +23,18 @@
     [name]="comment.isLiked ? 'heart' : 'heart-outline'"
     size="medium"
   ></ion-icon>
+</ion-item>
+
+<ion-item *ngIf="comment && !comment.recordingSrc">
+  <ion-label class="ion-text-wrap">
+    <p class="comment-text">{{ comment.text }}</p>
+    <div class="comment-footer">
+      <span
+        ><h3 class="username-text">{{ comment.username }}</h3></span
+      >
+      <span
+        ><small>{{ comment.createdAt | date :'HH:mm:ss - dd/MM/yyyy' }}</small></span
+      >
+    </div>
+  </ion-label>
 </ion-item>

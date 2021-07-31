@@ -24,7 +24,8 @@ export class CommentComponent implements OnInit {
 
   isPlaying() {
     return (
-      this.audioService.audio && this.comment.url === this.audioService.audio.src
+      this.audioService.audio &&
+      this.comment.recordingSrc === this.audioService.audio.src
     );
   }
 }

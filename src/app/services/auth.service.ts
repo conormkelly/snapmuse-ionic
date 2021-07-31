@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthService {
   private httpHeader = {
+    // eslint-disable-next-line
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 

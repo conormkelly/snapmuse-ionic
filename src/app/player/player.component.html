@@ -12,14 +12,18 @@
         <ion-thumbnail>
           <ion-img
             class="image-thumbnail"
-            src="https://images.pexels.com/photos/962985/pexels-photo-962985.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            [src]="post.imageSrc.small"
           ></ion-img>
         </ion-thumbnail>
       </ion-col>
+      
+      <!-- <ion-col size="1">
+        <ion-row class="song-title">{{ title }}</ion-row>
+      </ion-col> -->
 
       <ion-col size="4">
-        <ion-row class="song-title">{{ title }}</ion-row>
-        <ion-row class="song-user">{{ user }}</ion-row>
+        <ion-row class="song-title">{{ post.title }}</ion-row>
+        <ion-row class="song-user">{{ comment.username }}</ion-row>
       </ion-col>
 
       <!-- Menu -->
@@ -35,7 +39,7 @@
           <ion-icon
             class="heart-icon"
             [color]="isLiked ? 'danger' : 'secondary'"
-            [name]="isLiked ? 'heart' : 'heart-outline'" 
+            [name]="isLiked ? 'heart' : 'heart-outline'"
             size="large"
           ></ion-icon>
         </ion-button>

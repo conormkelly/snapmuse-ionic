@@ -24,12 +24,15 @@
   </ion-item> -->
 
   <div class="ion-padding upload-button">
-    <ion-button expand="block">Upload</ion-button>
+    <ion-button (click)="onAddComment()" expand="block">Post</ion-button>
   </div>
 
   <div class="ion-padding">
-    <ion-list *ngIf="post">
-      <app-comment *ngFor="let comment of getComments()" [comment]="comment"></app-comment>
+    <ion-list *ngIf="comments">
+      <app-comment
+        *ngFor="let comment of comments"
+        [comment]="comment"
+      ></app-comment>
     </ion-list>
   </div>
 </ion-content>

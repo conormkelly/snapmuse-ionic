@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
+import { Post } from '../models/Post';
+import { Comment } from '../models/Comment';
+
+import { PostsService } from './posts.service';
+
 export enum AudioState {
   playing = 'Playing',
   paused = 'Paused',
@@ -9,9 +14,8 @@ export enum AudioState {
 
 export interface AudioData {
   audio: HTMLAudioElement;
-  user: string;
-  title: string;
-  url: string;
+  post: Post;
+  comment: Comment;
   state: AudioState;
 }
 
@@ -23,20 +27,22 @@ export class AudioService {
 
   public audioSubject: Subject<AudioData> = new Subject();
 
-  constructor() {}
+  constructor(private postsService: PostsService) {}
 
-  public loadAudio({ url, user, title }) {
+  public async loadAudio(comment: Comment) {
     if (!this.audio) {
       this.audio = new Audio();
     }
-    if (this.audio.src !== url) {
-      this.audio.src = url;
+
+    const post = await this.postsService.getPostById(comment.postId);
+
+    if (this.audio.src !== comment.recordingSrc) {
+      this.audio.src = comment.recordingSrc;
       this.audio.onloadeddata = () => {
         this.audioSubject.next({
           audio: this.audio,
-          user,
-          title,
-          url,
+          comment,
+          post,
           state: AudioState.playing,
         });
         this.audio.play();

@@ -1,8 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { PostsService } from '../services/posts.service';
 import { Post } from '../models/Post';
+import { Comment } from '../models/Comment';
 
 @Component({
   selector: 'app-post-detail',
@@ -11,9 +12,9 @@ import { Post } from '../models/Post';
 })
 export class PostDetailPage implements OnInit {
   public post: Post;
+  public comments: Comment[] = [];
 
   constructor(
-    private data: DataService,
     private postsService: PostsService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -22,17 +23,30 @@ export class PostDetailPage implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.postsService.getPostById(id).then((post) => {
       this.post = post;
+
+      if (post) {
+        this.postsService.getComments(id).then((response) => {
+          this.comments = response.data;
+        });
+      }
     });
+  }
+
+  onAddComment() {
+    this.postsService
+      .addComment({
+        audioFile: null,
+        text: 'This is a test!',
+        postId: this.post._id,
+      })
+      .subscribe((response) => {
+        this.comments.unshift(response.data);
+      });
   }
 
   getBackButtonText() {
     const win = window as any;
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
-  }
-
-  // TODO: refactor to remove data service
-  getComments() {
-    return this.data.getComments();
   }
 }
