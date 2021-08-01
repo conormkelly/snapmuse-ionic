@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{isRegistering ? 'Register' : 'Login'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="userDetails" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="isRegistering">
+      <ion-label>Confirm Password</ion-label>
+      <ion-input type="password" formControlName="confirmPassword"></ion-input>
+    </ion-item>
+
+    <ion-button
+      type="submit"
+      [disabled]="!userDetails.valid"
+      (click)="onSubmit()"
+      expand="block"
+      >Submit</ion-button
+    >
+  </form>
+</ion-content>
