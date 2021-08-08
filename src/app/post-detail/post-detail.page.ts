@@ -37,7 +37,7 @@ export class PostDetailPage implements OnInit {
       .addComment({
         audioFile: null,
         text: 'This is a test!',
-        postId: this.post._id,
+        postId: this.post.id,
       })
       .subscribe((response) => {
         this.comments.unshift(response.data);

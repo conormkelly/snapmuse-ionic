@@ -1,16 +1,12 @@
-<ion-item
-  *ngIf="post"
-  [routerLink]="'/posts/' + post._id"
-  [detail]="false"
->
+<ion-item *ngIf="post" [routerLink]="'/posts/' + post.id" [detail]="false">
   <ion-thumbnail class="image-holder" slot="start">
-    <ion-img class="image-thumbnail" [src]="post.imageSrc.small"></ion-img>
+    <ion-img class="image-thumbnail" [src]="post.imageSrc"></ion-img>
   </ion-thumbnail>
   <ion-label class="ion-text-wrap">
     <h2>
       {{ post.title }}
       <span class="date">
-        <ion-note>{{ post.createdAt | date :'dd/MM/yyyy' }}</ion-note>
+        <ion-note>{{ post.createdAt | date: "dd/MM/yyyy" }}</ion-note>
         <ion-icon
           name="chevron-forward"
           size="small"

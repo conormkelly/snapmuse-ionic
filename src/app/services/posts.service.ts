@@ -28,7 +28,7 @@ export class PostsService {
 
   // TODO: handle error case
   async getPostById(id: string) {
-    let post = this.posts.find((p) => p._id === id);
+    let post = this.posts.find((p) => p.id === id);
     if (!post) {
       const response = await this.http
         .get<any>(`${this.apiBaseUrl}/posts/${id}`)

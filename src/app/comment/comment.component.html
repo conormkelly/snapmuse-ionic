@@ -6,7 +6,7 @@
 >
   <ion-label class="ion-text-wrap">
     <p class="comment-text">{{ comment.text }}</p>
-    <h3 class="username-text">{{ comment.username }}</h3>
+    <h3 class="username-text">{{ comment.user.username }}</h3>
   </ion-label>
 
   <ion-icon *ngIf="downloadState !== 'inProgress'"
@@ -32,7 +32,7 @@
     <p class="comment-text">{{ comment.text }}</p>
     <div class="comment-footer">
       <span
-        ><h3 class="username-text">{{ comment.username }}</h3></span
+        ><h3 class="username-text">{{ comment.user.username }}</h3></span
       >
       <span
         ><small>{{ comment.createdAt | date :'HH:mm:ss - dd/MM/yyyy' }}</small></span

@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
@@ -56,7 +55,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   onClickThumbnail() {
-    const postDetailUrl = `/posts/${this.post._id}`;
+    const postDetailUrl = `/posts/${this.post.id}`;
     if (this.router.url !== postDetailUrl) {
       this.router.navigateByUrl(postDetailUrl);
     }

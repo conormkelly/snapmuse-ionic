@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Component, Input, OnInit } from '@angular/core';
 import { AudioService } from '../services/audio.service';
 
@@ -31,9 +30,9 @@ export class CommentComponent implements OnInit {
     if (this.downloadState === 'none') {
       const post = await this.postsService.getPostById(this.comment.postId);
       this.downloadState = 'inProgress';
-      this.audioService.downloadFile(this.comment._id).subscribe((blob) => {
+      this.audioService.downloadFile(this.comment.id).subscribe((blob) => {
         this.downloadState = 'complete';
-        saveAs(blob, `${post.title}-${this.comment.username}.mp3`);
+        saveAs(blob, `${post.title}-${this.comment.user.username}.mp3`);
       });
     }
   }
