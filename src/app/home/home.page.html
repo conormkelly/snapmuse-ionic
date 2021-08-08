@@ -28,13 +28,15 @@
   <ion-grid class="margin-top">
     <ion-row>
       <ion-col>
-        <ion-button (click)="onLogin()" expand="block">Login</ion-button>
+        <ion-button [routerLink]="'/auth/login/'" expand="block"
+          >Login</ion-button
+        >
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button expand="block">Register</ion-button>
+        <ion-button [routerLink]="'/auth/register'" expand="block">Register</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

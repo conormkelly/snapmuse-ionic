@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +16,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register({ username, password }) {
+  register({ username, password }): Observable<any> {
     const url = `${this.apiBaseUrl}/auth/register`;
     return this.http
       .post<any>(url, { username, password }, this.httpHeader)
       .pipe(tap(this.storeToken));
   }
 
-  login({ username, password }) {
+  login({ username, password }): Observable<any> {
     const url = `${this.apiBaseUrl}/auth/login`;
     return this.http
       .post<any>(url, { username, password }, this.httpHeader)
@@ -30,7 +31,7 @@ export class AuthService {
   }
 
   logout() {
-    // localStorage.removeItem('snapmuse_token');
+    localStorage.removeItem('snapmuse_token');
     const url = `${this.apiBaseUrl}/auth/logout`;
     return this.http
       .post<any>(url, {}, this.httpHeader)
