@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostsService } from '../services/posts.service';
 import { Post } from '../models/Post';
@@ -11,8 +11,13 @@ import { Comment } from '../models/Comment';
   styleUrls: ['./post-detail.page.scss'],
 })
 export class PostDetailPage implements OnInit {
+  @ViewChild('fileChooser') fileChooserElementRef: ElementRef;
+
   public post: Post;
   public comments: Comment[] = [];
+
+  commentText = '';
+  selectedFile: File = null;
 
   constructor(
     private postsService: PostsService,
@@ -27,19 +32,62 @@ export class PostDetailPage implements OnInit {
       if (post) {
         this.postsService.getComments(id).then((response) => {
           this.comments = response.data;
+          this.addFileInputListener();
         });
       }
     });
   }
 
+  addFileInputListener() {
+    const wireUpFileChooser = () => {
+      const elementRef = this.fileChooserElementRef
+        .nativeElement as HTMLInputElement;
+      elementRef.addEventListener(
+        'change',
+        (evt: any) => {
+          console.log(evt);
+          const files = evt.target.files as File[];
+          if (files.length === 1) {
+            this.selectedFile = files[0];
+          } else {
+            this.selectedFile = null;
+          }
+        },
+        false
+      );
+    };
+    wireUpFileChooser();
+  }
+
+  onClickUpload() {
+    this.fileChooserElementRef.nativeElement.click();
+  }
+
+  isSendDisabled() {
+    const hasValidCommentText =
+      (this.commentText.length === 0 && this.selectedFile !== null) ||
+      (this.commentText.length >= 2 && this.commentText.length <= 280);
+
+    return !hasValidCommentText;
+  }
+
+  onSelectFile(ev) {
+    console.log('FILE SELECTED!');
+    console.log(ev);
+    console.log(ev.target);
+  }
+
   onAddComment() {
     this.postsService
       .addComment({
-        audioFile: null,
-        text: 'This is a test!',
+        audioFile: this.selectedFile,
+        text: this.commentText,
         postId: this.post.id,
       })
       .subscribe((response) => {
+        // TODO: Error handling
+        this.selectedFile = null;
+        this.commentText = '';
         this.comments.unshift(response.data);
       });
   }

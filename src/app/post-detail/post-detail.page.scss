@@ -57,3 +57,18 @@ p {
 .upload-button {
   padding-bottom: 0;
 }
+
+.add-comment-section {
+  margin-top: 1rem;
+  // border-top: 2px solid var(--ion-color-primary, #fff);
+  // border-bottom: 2px solid var(--ion-color-primary, #fff);
+  border-bottom: 2px solid #fff;
+}
+
+#comment-file-input {
+  visibility: hidden;
+}
+
+.add-comment-send-button {
+  align-self: flex-end;
+}
