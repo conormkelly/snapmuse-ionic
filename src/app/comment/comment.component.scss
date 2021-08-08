@@ -1,9 +1,11 @@
 .download-icon {
+    font-size: 1.5rem;
     margin-right: 1rem;
     padding: 0.5rem;
 }
 
 .heart-icon {
+    font-size: 1.5rem;
     padding: 0.5rem;
 }
 
@@ -11,9 +13,8 @@
     color: white;
 }
 
-.username-text {
+.comment-username {
     color: grey;
-    padding-top: 0.5rem;
 }
 
 .comment-footer {
@@ -22,7 +23,15 @@
 }
 
 .audio-comment {
-    border-style: solid none;
-    border-width: 1px;
-    border-color: var(--ion-color-primary, #fff);
+    border-bottom: 2px solid  var(--ion-color-primary, #fff);
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-item {
+    border-bottom: 1px solid var(--ion-color-secondary, #fff);
 }

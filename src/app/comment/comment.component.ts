@@ -23,7 +23,9 @@ export class CommentComponent implements OnInit {
   ngOnInit() {}
 
   onPlay() {
-    this.audioService.loadAudio(this.comment);
+    if (this.comment.recordingSrc) {
+      this.audioService.loadAudio(this.comment);
+    }
   }
 
   async onDownload() {
