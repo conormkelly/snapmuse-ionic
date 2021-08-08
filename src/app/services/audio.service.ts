@@ -50,6 +50,16 @@ export class AudioService {
         });
         this.audio.play();
       };
+
+      this.audio.onended = () => {
+        this.audioSubject.next({
+          audio: this.audio,
+          comment,
+          post,
+          state: AudioState.paused,
+        });
+      };
+
       this.audio.load();
     }
   }

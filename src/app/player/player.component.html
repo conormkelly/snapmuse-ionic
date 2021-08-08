@@ -48,7 +48,7 @@
       <ion-col size="2">
         <!-- Play -->
         <ion-button
-          *ngIf="!isPlaying"
+          *ngIf="playbackState === 'Paused'"
           [disabled]="!audio"
           (click)="onPlay()"
           fill="clear"
@@ -57,7 +57,7 @@
         </ion-button>
 
         <!-- Pause -->
-        <ion-button *ngIf="isPlaying" (click)="onPause()" fill="clear">
+        <ion-button *ngIf="playbackState === 'Playing'" (click)="onPause()" fill="clear">
           <ion-icon color="secondary" size="large" name="pause"></ion-icon>
         </ion-button>
       </ion-col>

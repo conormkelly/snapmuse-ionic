@@ -1,7 +1,9 @@
 <ion-item
   *ngIf="comment"
   [color]="isPlaying() ? 'light' : undefined"
-  [ngClass]="comment.recordingSrc && isPlaying() ? 'audio-comment' : 'comment-item'"
+  [ngClass]="
+    comment.recordingSrc && isPlaying() ? 'comment-item-audio-playing' : 'comment-item'
+  "
 >
   <ion-col>
     <ion-row (click)="onPlay()">

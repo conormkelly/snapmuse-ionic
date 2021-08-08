@@ -22,16 +22,17 @@
     justify-content: space-between;
 }
 
-.audio-comment {
+.comment-item-audio-playing {
+    border-top: 2px solid  var(--ion-color-primary, #fff);
     border-bottom: 2px solid  var(--ion-color-primary, #fff);
+}
+
+.comment-item {
+    border-bottom: 1px solid var(--ion-color-secondary, #fff);
 }
 
 .comment-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.comment-item {
-    border-bottom: 1px solid var(--ion-color-secondary, #fff);
 }

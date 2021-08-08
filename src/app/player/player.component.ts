@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { SongDetailComponent } from '../song-detail/song-detail.component';
 
 import { Subscription } from 'rxjs';
-import { AudioService } from '../services/audio.service';
+import { AudioService, AudioState } from '../services/audio.service';
 
 import { Comment } from '../models/Comment';
 import { Post } from '../models/Post';
@@ -20,7 +20,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public audio: HTMLAudioElement;
   public comment: Comment;
   public post: Post;
-  public isPlaying = false;
+  public playbackState: AudioState;
   public isLiked = false;
 
   constructor(
@@ -33,21 +33,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.audio$ = this.audioService
       .getAudioSubscription()
       .subscribe((audioData) => {
+        this.playbackState = audioData.state;
         this.audio = audioData.audio;
         this.comment = audioData.comment;
         this.post = audioData.post;
-        this.isPlaying = true;
       });
   }
 
   onPlay() {
     this.audio.play();
-    this.isPlaying = true;
+    this.playbackState = AudioState.playing;
   }
 
   onPause() {
     this.audio.pause();
-    this.isPlaying = false;
+    this.playbackState = AudioState.paused;
   }
 
   onToggleLike() {
