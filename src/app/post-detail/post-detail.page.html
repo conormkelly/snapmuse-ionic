@@ -34,17 +34,16 @@
       </ion-col>
       <ion-col size="2" class="add-comment-send-button">
         <ion-row>
-          <ion-label for="comment-file-input"
-            ><ion-button (click)="onClickUpload()" size="medium">
-              <ion-icon
-                [color]="selectedFile === null ? 'warning' : 'success'"
-                name="attach"
-              ></ion-icon>
-            </ion-button>
-          </ion-label>
+          <ion-button (click)="fileInput.click()" size="medium">
+            <ion-icon
+              [color]="selectedFile === null ? 'warning' : 'success'"
+              name="attach"
+            ></ion-icon>
+          </ion-button>
           <input
-            #fileChooser
-            id="comment-file-input"
+            #fileInput
+            class="ion-hide"
+            (change)="onSelectFile($event)"
             type="file"
             accept=".mp3"
             single
