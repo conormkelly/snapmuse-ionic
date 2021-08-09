@@ -14,9 +14,6 @@ export class PostDetailPage implements OnInit {
   public post: Post;
   public comments: Comment[] = [];
 
-  commentText = '';
-  selectedFile: File = null;
-
   constructor(
     private postsService: PostsService,
     private activatedRoute: ActivatedRoute
@@ -35,33 +32,12 @@ export class PostDetailPage implements OnInit {
     });
   }
 
-  isSendDisabled() {
-    const hasValidCommentText =
-      (this.commentText.length === 0 && this.selectedFile !== null) ||
-      (this.commentText.length >= 2 && this.commentText.length <= 280);
-
-    return !hasValidCommentText;
-  }
-
-  onSelectFile(ev) {
-    if (ev?.target?.files?.length === 1) {
-      this.selectedFile = ev.target.files[0];
-    }
-  }
-
-  onAddComment() {
-    this.postsService
-      .addComment({
-        audioFile: this.selectedFile,
-        text: this.commentText,
-        postId: this.post.id,
-      })
-      .subscribe((response) => {
-        // TODO: Error handling
-        this.selectedFile = null;
-        this.commentText = '';
-        this.comments.unshift(response.data);
-      });
+  /**
+   * Adds the comment emitted by the
+   * child `app-add-comment` component.
+   */
+  onAddComment(comment: Comment) {
+    this.comments.unshift(comment);
   }
 
   getBackButtonText() {

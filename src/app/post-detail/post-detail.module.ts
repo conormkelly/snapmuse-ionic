@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PostDetailPageRoutingModule } from './post-detail-routing.module';
 import { CommentComponent } from '../comment/comment.component';
+import { AddCommentComponent } from '../components/add-comment/add-comment.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { CommentComponent } from '../comment/comment.component';
     IonicModule,
     PostDetailPageRoutingModule,
   ],
-  declarations: [PostDetailPage, CommentComponent],
+  declarations: [PostDetailPage, CommentComponent, AddCommentComponent],
 })
 export class PostDetailPageModule {}

@@ -1,0 +1,100 @@
+<ion-card class="add-comment-card">
+  <ion-card-content class="comment-textarea">
+    <ion-textarea
+      [(ngModel)]="commentText"
+      rows="4"
+      placeholder="Add a comment..."
+    ></ion-textarea>
+  </ion-card-content>
+
+  <ion-row class="actions">
+    <!-- Upload -->
+    <ion-col size="3" class="action-button">
+      <!-- Add upload -->
+      <ion-button
+        *ngIf="selectedFile === null"
+        (click)="fileInput.click()"
+        size="medium"
+      >
+        <ion-icon name="attach"></ion-icon>
+      </ion-button>
+
+      <!-- Remove upload -->
+      <ion-button
+        color="danger"
+        *ngIf="selectedFile !== null"
+        (click)="onDeleteAttachment()"
+        size="medium"
+      >
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+      <input
+        #fileInput
+        class="ion-hide"
+        (change)="onSelectFile($event)"
+        type="file"
+        accept=".mp3"
+        single
+      />
+    </ion-col>
+
+    <!-- Filename label -->
+    <ion-col class="filename-text" size="6" *ngIf="selectedFile">
+      {{ selectedFile.name }}
+    </ion-col>
+
+    <!-- Send -->
+    <ion-col size="3" class="action-button">
+      <ion-button
+        class="action-button"
+        [disabled]="isSendDisabled()"
+        (click)="onAddComment()"
+        size="medium"
+      >
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-card>
+
+<!-- <div class="ion-padding add-comment-section">
+  <ion-row>
+    <ion-col size="10">
+      <ion-textarea
+        [(ngModel)]="commentText"
+        rows="4"
+        placeholder="Add a comment..."
+      ></ion-textarea>
+    </ion-col>
+    <ion-col size="2" class="button-send">
+      <ion-row>
+        <ion-button (click)="fileInput.click()" size="medium">
+          <ion-icon
+            [color]="selectedFile === null ? 'warning' : 'success'"
+            name="attach"
+          ></ion-icon>
+        </ion-button>
+        <input
+          #fileInput
+          class="ion-hide"
+          (change)="onSelectFile($event)"
+          type="file"
+          accept=".mp3"
+          single
+        />
+      </ion-row>
+
+      <ion-row>
+        <ion-button
+          class="button-send"
+          [disabled]="isSendDisabled()"
+          (click)="onAddComment()"
+          size="medium"
+        >
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</div> -->
