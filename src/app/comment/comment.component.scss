@@ -1,20 +1,14 @@
-.download-icon {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    padding: 0.5rem;
-}
-
-.heart-icon {
+.action-icon {
     font-size: 1.5rem;
     padding: 0.5rem;
 }
 
 .comment-text {
-    color: white;
+    color: var(--ion-color-step-950, #fff);
 }
 
 .comment-username {
-    color: grey;
+    color: var(--ion-color-medium, #fff);
 }
 
 .comment-footer {
@@ -23,8 +17,7 @@
 }
 
 .comment-item-audio-playing {
-    border-top: 2px solid  var(--ion-color-primary, #fff);
-    border-bottom: 2px solid  var(--ion-color-primary, #fff);
+    border-bottom: 1px solid  var(--ion-color-primary, #fff);
 }
 
 .comment-item {

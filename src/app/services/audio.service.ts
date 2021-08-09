@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -28,11 +28,11 @@ export interface AudioData {
 export class AudioService {
   public audio: HTMLAudioElement;
 
-  public audioSubject: Subject<AudioData> = new Subject();
+  public audioSubject: Subject<AudioData | null> = new Subject();
 
   constructor(private postsService: PostsService, private http: HttpClient) {}
 
-  public async loadAudio(comment: Comment) {
+  public async play(comment: Comment) {
     if (!this.audio) {
       this.audio = new Audio();
     }
@@ -61,6 +61,28 @@ export class AudioService {
       };
 
       this.audio.load();
+    } else {
+      this.audio.play();
+      this.audioSubject.next({
+        audio: this.audio,
+        comment,
+        post,
+        state: AudioState.playing,
+      });
+    }
+  }
+
+  async pause(comment) {
+    const post = await this.postsService.getPostById(comment.postId);
+
+    if (this.audio) {
+      this.audio.pause();
+      this.audioSubject.next({
+        audio: this.audio,
+        comment,
+        post,
+        state: AudioState.paused,
+      });
     }
   }
 

@@ -41,13 +41,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   onPlay() {
-    this.audio.play();
-    this.playbackState = AudioState.playing;
+    this.audioService.play(this.comment);
   }
 
   onPause() {
-    this.audio.pause();
-    this.playbackState = AudioState.paused;
+    this.audioService.pause(this.comment);
   }
 
   onToggleLike() {

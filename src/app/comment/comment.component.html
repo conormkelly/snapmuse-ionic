@@ -2,7 +2,9 @@
   *ngIf="comment"
   [color]="isPlaying() ? 'light' : undefined"
   [ngClass]="
-    comment.recordingSrc && isPlaying() ? 'comment-item-audio-playing' : 'comment-item'
+    comment.recordingSrc && isPlaying()
+      ? 'comment-item-audio-playing'
+      : 'comment-item'
   "
 >
   <ion-col>
@@ -20,10 +22,10 @@
       <ion-icon
         *ngIf="comment.recordingSrc && downloadState !== 'inProgress'"
         (click)="onDownload()"
-        class="download-icon"
+        class="action-icon"
         [color]="
           downloadState === 'none'
-            ? 'primary'
+            ? 'secondary'
             : downloadState === 'complete'
             ? 'success'
             : 'warning'
@@ -33,15 +35,15 @@
       ></ion-icon>
 
       <ion-spinner
-        color="primary"
-        class="download-icon"
+        color="secondary"
+        class="action-icon"
         *ngIf="downloadState === 'inProgress'"
         name="dots"
       ></ion-spinner>
 
       <ion-icon
         *ngIf="comment.recordingSrc"
-        class="heart-icon"
+        class="action-icon"
         [color]="comment.isLiked ? 'danger' : 'secondary'"
         [name]="comment.isLiked ? 'heart' : 'heart-outline'"
         size="medium"

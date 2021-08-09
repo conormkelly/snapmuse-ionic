@@ -24,7 +24,7 @@ export class CommentComponent implements OnInit {
 
   onPlay() {
     if (this.comment.recordingSrc) {
-      this.audioService.loadAudio(this.comment);
+      this.audioService.play(this.comment);
     }
   }
 
