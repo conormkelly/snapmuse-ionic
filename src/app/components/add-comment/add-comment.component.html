@@ -9,7 +9,7 @@
 
   <ion-row class="actions">
     <!-- Upload -->
-    <ion-col size="3" class="action-button">
+    <span>
       <!-- Add upload -->
       <ion-button
         *ngIf="selectedFile === null"
@@ -37,15 +37,15 @@
         accept=".mp3"
         single
       />
-    </ion-col>
+    </span>
 
     <!-- Filename label -->
-    <ion-col class="filename-text" size="6" *ngIf="selectedFile">
+    <span *ngIf="selectedFile" class="filename-text">
       {{ selectedFile.name }}
-    </ion-col>
+    </span>
 
     <!-- Send -->
-    <ion-col size="3" class="action-button">
+    <span>
       <ion-button
         class="action-button"
         [disabled]="isSendDisabled()"
@@ -54,7 +54,7 @@
       >
         <ion-icon name="send"></ion-icon>
       </ion-button>
-    </ion-col>
+    </span>
   </ion-row>
 </ion-card>
 
