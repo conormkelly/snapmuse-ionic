@@ -1,5 +1,6 @@
-export interface Comment {
+interface BaseComment {
   id: string;
+  parentId?: null | string;
   postId: string;
   user: {
     username: string;
@@ -7,4 +8,8 @@ export interface Comment {
   createdAt: Date;
   text: string;
   recordingSrc: string;
+}
+
+export interface Comment extends BaseComment {
+  children?: null | BaseComment[];
 }

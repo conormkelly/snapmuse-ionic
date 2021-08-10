@@ -1,0 +1,28 @@
+<ion-card>
+  <ion-card-content class="parent-comment-content">
+    <ion-list>
+      <app-comment [comment]="parentComment"></app-comment>
+    </ion-list>
+    <ion-row class="action-button-container">
+      <span>
+        <ion-button
+          size="small"
+          class="view-replies-button"
+          [hidden]="!hasChildren"
+          (click)="isOpen = !isOpen"
+        >
+          <ion-icon
+            [name]="isOpen ? 'eye-off-outline' : 'eye-outline'"
+          ></ion-icon>
+        </ion-button>
+      </span>
+    </ion-row>
+  </ion-card-content>
+
+  <ion-list [hidden]="!isOpen || !hasChildren" *ngIf="parentComment.children">
+    <app-comment
+      *ngFor="let childComment of parentComment.children"
+      [comment]="childComment"
+    ></app-comment>
+  </ion-list>
+</ion-card>

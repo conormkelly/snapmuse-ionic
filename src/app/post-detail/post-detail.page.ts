@@ -26,7 +26,18 @@ export class PostDetailPage implements OnInit {
 
       if (post) {
         this.postsService.getComments(id).then((response) => {
-          this.comments = response.data;
+          // TODO: fixme - temp for testing purposes
+          const tempComments = response.data;
+
+          if (tempComments.length > 3) {
+            const tempChild1 = tempComments.pop();
+            const tempChild2 = tempComments.pop();
+            tempChild1.parentId = tempComments[0].id;
+            tempChild2.parentId = tempComments[0].id;
+            tempComments[0].children = [tempChild1, tempChild2];
+          }
+
+          this.comments = tempComments;
         });
       }
     });

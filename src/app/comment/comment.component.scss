@@ -5,9 +5,11 @@
 
 .comment-text {
     color: var(--ion-color-step-950, #fff);
+    padding: 0.25rem;
 }
 
 .comment-username {
+    font-size: 1rem;
     color: var(--ion-color-medium, #fff);
 }
 
@@ -16,16 +18,21 @@
     justify-content: space-between;
 }
 
-.comment-item-audio-playing {
+.audio-playing {
     border-bottom: 1px solid  var(--ion-color-primary, #fff);
 }
 
-.comment-item {
+.parent-comment {
     border-bottom: 1px solid var(--ion-color-secondary, #fff);
+}
+
+.child-comment {
+    margin-left: 1.5rem;
 }
 
 .comment-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.25rem;
 }

@@ -20,12 +20,10 @@
     (commentAdded)="onAddComment($event)"
   ></app-add-comment>
 
-  <div class="ion-padding">
-    <ion-list *ngIf="comments">
-      <app-comment
-        *ngFor="let comment of comments"
-        [comment]="comment"
-      ></app-comment>
-    </ion-list>
+  <div *ngIf="comments">
+    <app-parent-comment
+      *ngFor="let parentComment of comments"
+      [parentComment]="parentComment"
+    ></app-parent-comment>
   </div>
 </ion-content>
