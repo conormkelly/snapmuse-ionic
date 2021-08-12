@@ -5,6 +5,8 @@ import { PostsService } from '../services/posts.service';
 import { Comment } from '../models/Comment';
 
 import { saveAs } from 'file-saver';
+import { ModalController } from '@ionic/angular';
+import { CommentReplyComponent } from '../comment-reply/comment-reply.component';
 
 @Component({
   selector: 'app-comment',
@@ -13,11 +15,13 @@ import { saveAs } from 'file-saver';
 })
 export class CommentComponent implements OnInit {
   @Input() comment: Comment;
+  @Input() isReplying: boolean;
   downloadState = 'none';
 
   constructor(
     private audioService: AudioService,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {}
@@ -37,6 +41,21 @@ export class CommentComponent implements OnInit {
         saveAs(blob, `${post.title}-${this.comment.user.username}.mp3`);
       });
     }
+  }
+
+  async onReply() {
+    const modal = await this.modalController.create({
+      component: CommentReplyComponent,
+      componentProps: {
+        originalComment: this.comment,
+      },
+    });
+    return await modal.present();
+
+    // TODO: figure out how to trigger refresh
+    // const { data } = await modal.onWillDismiss();
+    // if (data && data.comment) {
+    // }
   }
 
   isPlaying() {

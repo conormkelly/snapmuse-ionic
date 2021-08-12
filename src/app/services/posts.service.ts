@@ -61,15 +61,15 @@ export class PostsService {
     return this.http.get<any>(url, this.httpHeader).toPromise();
   }
 
-  addComment({ audioFile, text, postId }) {
+  addComment({ audioFile, text, postId, parentId }) {
     const url = `${this.apiBaseUrl}/posts/${postId}/comments`;
 
-    const options = {};
     const formData = new FormData();
 
     // Append files and data to the virtual form
+    formData.append('parentId', parentId);
     formData.append('audio', audioFile);
     formData.append('text', text);
-    return this.http.post<any>(url, formData, options);
+    return this.http.post<any>(url, formData);
   }
 }

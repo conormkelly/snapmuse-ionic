@@ -8,7 +8,8 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./add-comment.component.scss'],
 })
 export class AddCommentComponent implements OnInit {
-  @Input() post: Post;
+  @Input() postId: string;
+  @Input() parentId: string;
   @Output() commentAdded = new EventEmitter<Comment>();
 
   commentText = '';
@@ -41,7 +42,8 @@ export class AddCommentComponent implements OnInit {
       .addComment({
         audioFile: this.selectedFile,
         text: this.commentText,
-        postId: this.post.id,
+        postId: this.postId,
+        parentId: this.parentId
       })
       .subscribe((response) => {
         // TODO: Error handling

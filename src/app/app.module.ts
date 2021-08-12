@@ -10,9 +10,19 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { DurationPipe } from './duration.pipe';
+import { CommentReplyComponent } from './comment-reply/comment-reply.component';
+import { CommentComponent } from './comment/comment.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 @NgModule({
-  declarations: [AppComponent, PlayerComponent, DurationPipe],
+  declarations: [
+    AppComponent,
+    PlayerComponent,
+    CommentComponent,
+    AddCommentComponent,
+    CommentReplyComponent,
+    DurationPipe,
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,

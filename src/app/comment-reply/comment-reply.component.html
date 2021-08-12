@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Reply</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-comment [isReplying]="true" [comment]="originalComment"></app-comment>
+
+  <app-add-comment
+    [postId]="originalComment.postId"
+    [parentId]="originalComment.id"
+    (commentAdded)="onAddComment($event)"
+  ></app-add-comment>
+</ion-content>

@@ -11,12 +11,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" *ngIf="post">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="image-container">
     <ion-img class="full-image" [src]="post.imageSrc"></ion-img>
   </div>
 
   <app-add-comment
-    [post]="post"
+    [postId]="post.id"
+    [parentId]="null"
     (commentAdded)="onAddComment($event)"
   ></app-add-comment>
 

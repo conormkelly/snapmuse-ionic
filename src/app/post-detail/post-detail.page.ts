@@ -20,27 +20,21 @@ export class PostDetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.postsService.getPostById(id).then((post) => {
-      this.post = post;
+    this.loadComments();
+  }
 
-      if (post) {
-        this.postsService.getComments(id).then((response) => {
-          // TODO: fixme - temp for testing purposes
-          const tempComments = response.data;
+  async loadComments() {
+    if (!this.post) {
+      const id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.post = await this.postsService.getPostById(id);
+    }
+    const response = await this.postsService.getComments(this.post.id);
+    this.comments = response.data;
+  }
 
-          if (tempComments.length > 3) {
-            const tempChild1 = tempComments.pop();
-            const tempChild2 = tempComments.pop();
-            tempChild1.parentId = tempComments[0].id;
-            tempChild2.parentId = tempComments[0].id;
-            tempComments[0].children = [tempChild1, tempChild2];
-          }
-
-          this.comments = tempComments;
-        });
-      }
-    });
+  async refresh(ev) {
+    await this.loadComments();
+    ev.detail.complete();
   }
 
   /**
@@ -48,7 +42,8 @@ export class PostDetailPage implements OnInit {
    * child `app-add-comment` component.
    */
   onAddComment(comment: Comment) {
-    this.comments.unshift(comment);
+    // TODO: handle pushing it to correct place
+    this.comments.push(comment);
   }
 
   getBackButtonText() {

@@ -8,7 +8,7 @@ import { Comment } from '../models/Comment';
 })
 export class ParentCommentComponent implements OnInit {
   @Input() parentComment: Comment;
-  isOpen = false;
+  isOpen = true;
   hasChildren: boolean;
 
   constructor() {}
