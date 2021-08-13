@@ -16,7 +16,7 @@ export class ParentCommentComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.hasChildren = this.parentComment.children.length > 0;
+    this.hasChildren = this.parentComment?.children?.length > 0;
   }
 
   onCommentAdded(ev) {
