@@ -1,15 +1,13 @@
-interface BaseComment {
+interface ChildComment {
   id: string;
-  parentId?: null | string;
+  parentId: null | string;
   postId: string;
-  user: {
-    username: string;
-  };
+  username: string;
   createdAt: Date;
   text: string;
-  recordingSrc: string;
+  recordingSrc: null | string;
 }
 
-export interface Comment extends BaseComment {
-  children?: null | BaseComment[];
+export interface Comment extends ChildComment {
+  children: ChildComment[];
 }

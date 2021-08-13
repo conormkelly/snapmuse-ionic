@@ -40,7 +40,7 @@ export class CommentComponent implements OnInit {
       this.downloadState = 'inProgress';
       this.audioService.downloadFile(this.comment.id).subscribe((blob) => {
         this.downloadState = 'complete';
-        saveAs(blob, `${post.title}-${this.comment.user.username}.mp3`);
+        saveAs(blob, `${post.title}-${this.comment.username}.mp3`);
       });
     }
   }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import {Comment} from '../models/Comment';
+import { Comment } from '../models/Comment';
 
 @Component({
   selector: 'app-parent-comment',
@@ -16,7 +16,7 @@ export class ParentCommentComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.hasChildren = this.parentComment?.children?.length > 0;
+    this.hasChildren = this.parentComment.children.length > 0;
   }
 
   onCommentAdded(ev) {
