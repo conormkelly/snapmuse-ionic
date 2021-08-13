@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AudioService } from '../services/audio.service';
 
 import { PostsService } from '../services/posts.service';
@@ -16,6 +16,8 @@ import { CommentReplyComponent } from '../comment-reply/comment-reply.component'
 export class CommentComponent implements OnInit {
   @Input() comment: Comment;
   @Input() isReplying: boolean;
+  @Output() commentAdded = new EventEmitter<Comment>();
+
   downloadState = 'none';
 
   constructor(
@@ -50,12 +52,13 @@ export class CommentComponent implements OnInit {
         originalComment: this.comment,
       },
     });
-    return await modal.present();
+    await modal.present();
 
-    // TODO: figure out how to trigger refresh
-    // const { data } = await modal.onWillDismiss();
-    // if (data && data.comment) {
-    // }
+    // pass back commentAdded action to parent
+    const { data } = await modal.onWillDismiss();
+    if (data && data.comment) {
+      this.commentAdded.emit(data.comment);
+    }
   }
 
   isPlaying() {

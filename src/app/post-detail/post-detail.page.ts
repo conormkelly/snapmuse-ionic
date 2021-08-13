@@ -13,6 +13,7 @@ import { Comment } from '../models/Comment';
 export class PostDetailPage implements OnInit {
   public post: Post;
   public comments: Comment[] = [];
+  isLoading = false;
 
   constructor(
     private postsService: PostsService,
@@ -24,12 +25,23 @@ export class PostDetailPage implements OnInit {
   }
 
   async loadComments() {
-    if (!this.post) {
-      const id = this.activatedRoute.snapshot.paramMap.get('id');
-      this.post = await this.postsService.getPostById(id);
+    try {
+      this.isLoading = true;
+
+      if (!this.post) {
+        const id = this.activatedRoute.snapshot.paramMap.get('id');
+        this.post = await this.postsService.getPostById(id);
+      }
+      const response = await this.postsService.getComments(this.post.id);
+      this.isLoading = false;
+      this.comments = response.data;
+    } catch (err) {
+      this.isLoading = false;
     }
-    const response = await this.postsService.getComments(this.post.id);
-    this.comments = response.data;
+  }
+
+  onCommentAdded(comment: Comment) {
+    this.loadComments();
   }
 
   async refresh(ev) {

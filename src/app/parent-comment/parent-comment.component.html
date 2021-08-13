@@ -1,7 +1,10 @@
 <ion-card>
   <ion-card-content class="parent-comment-content">
     <ion-list>
-      <app-comment [comment]="parentComment"></app-comment>
+      <app-comment
+        (commentAdded)="onCommentAdded($event)"
+        [comment]="parentComment"
+      ></app-comment>
     </ion-list>
     <ion-row class="action-button-container">
       <span>
@@ -21,6 +24,7 @@
 
   <ion-list [hidden]="!isOpen || !hasChildren" *ngIf="parentComment.children">
     <app-comment
+      (commentAdded)="onCommentAdded($event)"
       *ngFor="let childComment of parentComment.children"
       [comment]="childComment"
     ></app-comment>

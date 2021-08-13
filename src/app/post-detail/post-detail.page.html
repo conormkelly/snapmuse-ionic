@@ -25,8 +25,13 @@
     (commentAdded)="onAddComment($event)"
   ></app-add-comment>
 
-  <div *ngIf="comments">
+  <div *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && comments">
     <app-parent-comment
+      (commentAdded)="onCommentAdded($event)"
       *ngFor="let parentComment of comments"
       [parentComment]="parentComment"
     ></app-parent-comment>
