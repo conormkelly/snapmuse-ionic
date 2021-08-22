@@ -5,6 +5,7 @@ import { Post } from '../models/Post';
 import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import { Comment } from '../models/Comment';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +61,7 @@ export class PostsService {
 
   getComments(postId: string) {
     const url = `${this.apiBaseUrl}/posts/${postId}/comments`;
-    return this.http.get<{data: Comment[]}>(url, this.httpHeader).toPromise();
+    return this.http.get<{ data: Comment[] }>(url, this.httpHeader).toPromise();
   }
 
   addComment({ audioFile, text, postId, parentId }) {
