@@ -3,6 +3,8 @@ import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +14,7 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  private apiBaseUrl = 'http://localhost:3000';
+  private apiBaseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +40,7 @@ export class AuthService {
       .pipe(tap(this.storeToken));
   }
 
-  private storeToken({ token }) {
-    localStorage.setItem('snapmuse_token', token);
+  private storeToken({ data }) {
+    localStorage.setItem('snapmuse_token', data);
   }
 }

@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from '../models/Post';
 import { BehaviorSubject } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +15,7 @@ export class PostsService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  private apiBaseUrl = 'http://localhost:3000';
+  private apiBaseUrl = environment.apiBaseUrl;
 
   private posts: Post[] = [];
   private postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject(
@@ -45,10 +47,10 @@ export class PostsService {
   async getAllPosts() {
     try {
       const url = `${this.apiBaseUrl}/posts`;
-      const posts = await this.http
-        .get<Post[]>(url, this.httpHeader)
+      const res = await this.http
+        .get<{ data: Post[] }>(url, this.httpHeader)
         .toPromise();
-      this.posts = posts;
+      this.posts = res.data;
       this.postsSubject.next(this.posts);
       return true;
     } catch (err) {
@@ -58,7 +60,7 @@ export class PostsService {
 
   getComments(postId: string) {
     const url = `${this.apiBaseUrl}/posts/${postId}/comments`;
-    return this.http.get<any>(url, this.httpHeader).toPromise();
+    return this.http.get<{data: Comment[]}>(url, this.httpHeader).toPromise();
   }
 
   addComment({ audioFile, text, postId, parentId }) {

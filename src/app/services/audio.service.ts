@@ -8,6 +8,7 @@ import { Post } from '../models/Post';
 import { Comment } from '../models/Comment';
 
 import { PostsService } from './posts.service';
+import { environment } from 'src/environments/environment';
 
 export enum AudioState {
   playing = 'Playing',
@@ -89,7 +90,7 @@ export class AudioService {
   downloadFile(commentId): Observable<any> {
     // TODO: fix hardcoded url - this is only working right now because
     // the backend is not verifying the post id, just commentId
-    const url = `http://localhost:3000/posts/123/comments/${commentId}/audio`;
+    const url = `${environment.apiBaseUrl}/posts/123/comments/${commentId}/audio`;
     return this.http.get(url, {
       responseType: 'blob',
       headers: {
