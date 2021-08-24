@@ -6,9 +6,8 @@ import { PostDetailPage } from './post-detail.page';
 import { IonicModule } from '@ionic/angular';
 
 import { PostDetailPageRoutingModule } from './post-detail-routing.module';
-import { CommentComponent } from '../comment/comment.component';
-import { AddCommentComponent } from '../components/add-comment/add-comment.component';
 import { ParentCommentComponent } from '../parent-comment/parent-comment.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,12 +15,8 @@ import { ParentCommentComponent } from '../parent-comment/parent-comment.compone
     FormsModule,
     IonicModule,
     PostDetailPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [
-    PostDetailPage,
-    CommentComponent,
-    AddCommentComponent,
-    ParentCommentComponent,
-  ],
+  declarations: [PostDetailPage, ParentCommentComponent],
 })
 export class PostDetailPageModule {}

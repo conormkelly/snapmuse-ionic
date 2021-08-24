@@ -10,5 +10,5 @@ interface ChildComment {
 }
 
 export interface Comment extends ChildComment {
-  children: ChildComment[];
+  children?: ChildComment[];
 }

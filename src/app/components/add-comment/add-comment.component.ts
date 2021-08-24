@@ -9,7 +9,7 @@ import { PostsService } from 'src/app/services/posts.service';
 export class AddCommentComponent implements OnInit {
   @Input() postId: string;
   @Input() parentId: string;
-  @Output() commentAdded = new EventEmitter<Comment>();
+  @Output() commentAdded = new EventEmitter<any>();
 
   commentText = '';
   selectedFile: File = null;
@@ -42,7 +42,7 @@ export class AddCommentComponent implements OnInit {
         audioFile: this.selectedFile,
         text: this.commentText,
         postId: this.postId,
-        parentId: this.parentId
+        parentId: this.parentId,
       })
       .subscribe((response) => {
         // TODO: Error handling
