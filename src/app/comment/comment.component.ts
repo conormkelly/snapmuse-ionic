@@ -61,6 +61,23 @@ export class CommentComponent implements OnInit {
     }
   }
 
+  async onToggleLiked() {
+    const originalValue = this.comment.isLiked;
+
+    try {
+      this.comment.isLiked = !originalValue;
+
+      await this.postsService.likeComment({
+        commentId: this.comment.id,
+        postId: this.comment.postId,
+        isLiked: this.comment.isLiked,
+      });
+    } catch (err) {
+      console.log('An error occurred!');
+      this.comment.isLiked = originalValue;
+    }
+  }
+
   isPlaying() {
     return (
       this.audioService.audio &&

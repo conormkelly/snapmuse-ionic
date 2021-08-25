@@ -9,6 +9,7 @@ import { AudioService, AudioState } from '../services/audio.service';
 import { Comment } from '../models/Comment';
 import { Post } from '../models/Post';
 import { Router } from '@angular/router';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-player',
@@ -21,12 +22,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public comment: Comment;
   public post: Post;
   public playbackState: AudioState;
-  public isLiked = false;
 
   constructor(
     private modalService: ModalController,
     private router: Router,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private postsService: PostsService
   ) {}
 
   ngOnInit() {
@@ -48,8 +49,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.audioService.pause(this.comment);
   }
 
-  onToggleLike() {
-    this.isLiked = !this.isLiked;
+  async onToggleLike() {
+    const originalValue = this.comment.isLiked;
+
+    try {
+      this.comment.isLiked = !originalValue;
+
+      await this.postsService.likeComment({
+        commentId: this.comment.id,
+        postId: this.comment.postId,
+        isLiked: this.comment.isLiked,
+      });
+    } catch (err) {
+      console.log('An error occurred!');
+      this.comment.isLiked = originalValue;
+    }
   }
 
   onClickThumbnail() {

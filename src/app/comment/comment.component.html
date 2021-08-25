@@ -41,6 +41,7 @@
       ></ion-spinner>
 
       <ion-icon
+        (click)=onToggleLiked()
         *ngIf="comment.recordingSrc"
         class="action-icon"
         [color]="comment.isLiked ? 'danger' : 'secondary'"

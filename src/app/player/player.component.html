@@ -38,8 +38,8 @@
         <ion-button (click)="onToggleLike()" [disabled]="!audio" fill="clear">
           <ion-icon
             class="heart-icon"
-            [color]="isLiked ? 'danger' : 'secondary'"
-            [name]="isLiked ? 'heart' : 'heart-outline'"
+            [color]="comment.isLiked ? 'danger' : 'secondary'"
+            [name]="comment.isLiked ? 'heart' : 'heart-outline'"
             size="large"
           ></ion-icon>
         </ion-button>

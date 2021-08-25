@@ -6,7 +6,7 @@ interface ChildComment {
   createdAt: Date;
   text: string;
   recordingSrc: null | string;
-  isLiked?: boolean;
+  isLiked: boolean;
 }
 
 export interface Comment extends ChildComment {
