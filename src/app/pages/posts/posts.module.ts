@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { PostsPage } from './posts.page';
 import { PostsPageRoutingModule } from './posts-routing.module';
-import { PostItemComponentModule } from './post-item/post-item.module';
+import { PostItemComponentModule } from './components/post-item/post-item.module';
 
 @NgModule({
   imports: [
