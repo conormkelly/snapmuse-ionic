@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
-import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import { AudioService, AudioState } from '../services/audio.service';
 
 import { Comment } from '../models/Comment';
 import { Post } from '../models/Post';
-import { Router } from '@angular/router';
+
+import { AudioService, AudioState } from '../services/audio.service';
 import { LikesService } from '../services/likes.service';
 
 @Component({
@@ -23,7 +22,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public playbackState: AudioState;
 
   constructor(
-    private modalService: ModalController,
     private router: Router,
     private audioService: AudioService,
     private likesService: LikesService
