@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PostsService } from '../services/posts.service';
-import { Post } from '../models/Post';
-import { Comment } from '../models/Comment';
+import { PostsService } from '../../services/posts.service';
+import { Post } from '../../models/Post';
+import { Comment } from '../../models/Comment';
 
 @Component({
   selector: 'app-post-detail',

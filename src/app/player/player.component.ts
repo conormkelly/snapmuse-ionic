@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-import { SongDetailComponent } from '../song-detail/song-detail.component';
+import { SongDetailComponent } from './components/song-detail/song-detail.component';
 
 import { Subscription } from 'rxjs';
 import { AudioService, AudioState } from '../services/audio.service';

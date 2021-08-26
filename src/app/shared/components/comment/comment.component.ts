@@ -1,12 +1,12 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AudioService } from '../services/audio.service';
+import { AudioService } from '../../../services/audio.service';
 
-import { PostsService } from '../services/posts.service';
-import { Comment } from '../models/Comment';
+import { PostsService } from '../../../services/posts.service';
+import { Comment } from '../../../models/Comment';
 
 import { saveAs } from 'file-saver';
 import { ModalController } from '@ionic/angular';
-import { CommentReplyComponent } from '../comment-reply/comment-reply.component';
+import { CommentReplyComponent } from '../../../pages/post-detail/components/comment-reply/comment-reply.component';
 
 @Component({
   selector: 'app-comment',

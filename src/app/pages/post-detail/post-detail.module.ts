@@ -6,8 +6,8 @@ import { PostDetailPage } from './post-detail.page';
 import { IonicModule } from '@ionic/angular';
 
 import { PostDetailPageRoutingModule } from './post-detail-routing.module';
-import { ParentCommentComponent } from '../parent-comment/parent-comment.component';
-import { SharedModule } from '../shared/shared.module';
+import { ParentCommentComponent } from './components/parent-comment/parent-comment.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Comment } from '../models/Comment';
+import { Comment } from '../../../../models/Comment';
 
 @Component({
   selector: 'app-comment-reply',

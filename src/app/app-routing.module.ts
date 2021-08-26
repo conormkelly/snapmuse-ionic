@@ -5,22 +5,22 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./home/home.module').then((m) => m.HomePageModule),
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: 'auth/:action',
     loadChildren: () =>
-      import('./auth/auth.module').then((m) => m.AuthPageModule),
+      import('./pages/auth/auth.module').then((m) => m.AuthPageModule),
   },
   {
     path: 'posts',
     loadChildren: () =>
-      import('./posts/posts.module').then((m) => m.PostsPageModule),
+      import('./pages/posts/posts.module').then((m) => m.PostsPageModule),
   },
   {
     path: 'posts/:id',
     loadChildren: () =>
-      import('./post-detail/post-detail.module').then(
+      import('./pages/post-detail/post-detail.module').then(
         (m) => m.PostDetailPageModule
       ),
   },
