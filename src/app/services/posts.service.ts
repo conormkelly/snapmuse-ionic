@@ -75,11 +75,4 @@ export class PostsService {
     formData.append('text', text);
     return this.http.post<any>(url, formData);
   }
-
-  likeComment({ commentId, postId, isLiked }) {
-    const url = `${this.apiBaseUrl}/posts/${postId}/comments/${commentId}/likes`;
-    return this.http
-      .put<any>(url, { value: isLiked }, this.httpHeader)
-      .toPromise();
-  }
 }

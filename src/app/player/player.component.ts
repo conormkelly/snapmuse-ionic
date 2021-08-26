@@ -9,7 +9,7 @@ import { AudioService, AudioState } from '../services/audio.service';
 import { Comment } from '../models/Comment';
 import { Post } from '../models/Post';
 import { Router } from '@angular/router';
-import { PostsService } from '../services/posts.service';
+import { LikesService } from '../services/likes.service';
 
 @Component({
   selector: 'app-player',
@@ -27,7 +27,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     private modalService: ModalController,
     private router: Router,
     private audioService: AudioService,
-    private postsService: PostsService
+    private likesService: LikesService
   ) {}
 
   ngOnInit() {
@@ -55,9 +55,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     try {
       this.comment.isLiked = !originalValue;
 
-      await this.postsService.likeComment({
+      await this.likesService.setIsLiked({
         commentId: this.comment.id,
-        postId: this.comment.postId,
         isLiked: this.comment.isLiked,
       });
     } catch (err) {

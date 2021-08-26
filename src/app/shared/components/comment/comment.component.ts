@@ -7,6 +7,8 @@ import { Comment } from '../../../models/Comment';
 import { saveAs } from 'file-saver';
 import { ModalController } from '@ionic/angular';
 import { CommentReplyComponent } from '../../../pages/post-detail/components/comment-reply/comment-reply.component';
+import { LikesService } from 'src/app/services/likes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comment',
@@ -23,7 +25,9 @@ export class CommentComponent implements OnInit {
   constructor(
     private audioService: AudioService,
     private postsService: PostsService,
-    private modalController: ModalController
+    private likesService: LikesService,
+    private modalController: ModalController,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -67,9 +71,8 @@ export class CommentComponent implements OnInit {
     try {
       this.comment.isLiked = !originalValue;
 
-      await this.postsService.likeComment({
+      await this.likesService.setIsLiked({
         commentId: this.comment.id,
-        postId: this.comment.postId,
         isLiked: this.comment.isLiked,
       });
     } catch (err) {
@@ -83,5 +86,9 @@ export class CommentComponent implements OnInit {
       this.audioService.audio &&
       this.comment.recordingSrc === this.audioService.audio.src
     );
+  }
+
+  isOnUserLikesPage() {
+    return this.router.url === '/likes';
   }
 }
