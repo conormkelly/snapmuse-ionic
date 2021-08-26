@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-import { SongDetailComponent } from './components/song-detail/song-detail.component';
 
 import { Subscription } from 'rxjs';
 import { AudioService, AudioState } from '../services/audio.service';
@@ -74,12 +73,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.audio$.unsubscribe();
-  }
-
-  async onPresentModal() {
-    const modal = await this.modalService.create({
-      component: SongDetailComponent,
-    });
-    return await modal.present();
   }
 }

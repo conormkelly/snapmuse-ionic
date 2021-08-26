@@ -6,7 +6,7 @@ import { Comment } from '../../../models/Comment';
 
 import { saveAs } from 'file-saver';
 import { ModalController } from '@ionic/angular';
-import { CommentReplyComponent } from '../../../pages/post-detail/components/comment-reply/comment-reply.component';
+import { CommentReplyComponent } from '../../../pages/posts/post-detail/components/comment-reply/comment-reply.component';
 import { LikesService } from 'src/app/services/likes.service';
 import { Router } from '@angular/router';
 

@@ -6,7 +6,7 @@
     <h2>
       {{ post.title }}
       <span class="date">
-        <ion-note>{{ post.createdAt | date: "dd/MM/yyyy" }}</ion-note>
+        <ion-note>{{ post.createdAt | duration }}</ion-note>
         <ion-icon
           name="chevron-forward"
           size="small"

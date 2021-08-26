@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Comment } from '../../../../models/Comment';
+import { Comment } from '../../../../../models/Comment';
 
 @Component({
   selector: 'app-parent-comment',
