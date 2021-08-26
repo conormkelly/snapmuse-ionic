@@ -1,36 +1,15 @@
 <ion-toolbar *ngIf="audio" color="primary" padding>
   <ion-grid>
     <ion-row id="media-controls">
-      <!-- Back -->
-      <!-- <ion-col>
-        <ion-button fill="clear">
-          <ion-icon color="secondary" name="play-back-outline"></ion-icon>
-        </ion-button>
-      </ion-col> -->
-
       <ion-col size="2">
         <ion-thumbnail (click)="onClickThumbnail()">
-          <ion-img
-            class="image-thumbnail"
-            [src]="post.imageSrc"
-          ></ion-img>
+          <ion-img class="image-thumbnail" [src]="post.imageSrc"></ion-img>
         </ion-thumbnail>
       </ion-col>
-      
-      <!-- <ion-col size="1">
-        <ion-row class="song-title">{{ title }}</ion-row>
-      </ion-col> -->
 
       <ion-col size="4">
         <ion-row class="song-title">{{ post.title }}</ion-row>
         <ion-row class="song-user">{{ comment.username }}</ion-row>
-      </ion-col>
-
-      <!-- Menu -->
-      <ion-col size="2">
-        <ion-button fill="clear">
-          <ion-icon color="secondary" name="ellipsis-vertical"></ion-icon>
-        </ion-button>
       </ion-col>
 
       <!-- Like -->
@@ -57,17 +36,14 @@
         </ion-button>
 
         <!-- Pause -->
-        <ion-button *ngIf="playbackState === 'Playing'" (click)="onPause()" fill="clear">
+        <ion-button
+          *ngIf="playbackState === 'Playing'"
+          (click)="onPause()"
+          fill="clear"
+        >
           <ion-icon color="secondary" size="large" name="pause"></ion-icon>
         </ion-button>
       </ion-col>
-
-      <!-- Forward -->
-      <!-- <ion-col>
-        <ion-button fill="clear">
-          <ion-icon color="secondary" name="play-forward-outline"></ion-icon>
-        </ion-button>
-      </ion-col> -->
     </ion-row>
   </ion-grid>
 </ion-toolbar>
