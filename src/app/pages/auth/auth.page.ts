@@ -98,7 +98,6 @@ export class AuthPage implements OnInit {
 
   onRegister() {
     this.authService.register(this.userDetails.value).subscribe((response) => {
-      console.log(response);
       if (response.status !== 401) {
         this.router.navigateByUrl('/posts');
       } else {
@@ -109,7 +108,6 @@ export class AuthPage implements OnInit {
 
   onLogin() {
     this.authService.login(this.userDetails.value).subscribe((response) => {
-      console.log(response);
       if (response.status !== 401) {
         this.router.navigateByUrl('/posts');
       } else {
