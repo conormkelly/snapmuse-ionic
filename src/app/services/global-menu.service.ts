@@ -33,7 +33,8 @@ export class GlobalMenuService {
           handler: async () => {
             // TODO: make promise
             await this.authService.logout();
-            this.router.navigateByUrl('/');
+            await this.router.navigateByUrl('/');
+            window.location.reload();
           },
         },
         {
