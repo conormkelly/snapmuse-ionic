@@ -1,23 +1,36 @@
-<ion-item
-  *ngIf="comment"
-  [color]="isPlaying() ? 'light' : undefined"
-  [ngClass]="{
-    'parent-comment': !comment.parentId && !isOnUserLikesPage && !isReplying,
-    'child-comment': comment.parentId && !isOnUserLikesPage && !isReplying
-  }"
->
-  <ion-col (click)="onPlay()">
-    <ion-row>
-      <ion-label class="ion-text-wrap">
-        <p class="comment-text">{{ comment.text }}</p>
-      </ion-label>
-    </ion-row>
+<!-- Sliding item with text options on both sides -->
+<ion-item-sliding>
+  <ion-item-options side="start" [disabled]="isReplying || isOnUserLikesPage">
+    <ion-item-option (click)="onReply()"> Reply </ion-item-option>
+  </ion-item-options>
 
-    <ion-row class="comment-meta">
-      <span>
-        <p class="comment-username">{{ comment.username }}</p>
-      </span>
+  <ion-item
+    *ngIf="comment"
+    [color]="isPlaying() ? 'light' : undefined"
+    [ngClass]="{
+      'parent-comment': !comment.parentId && !isOnUserLikesPage && !isReplying,
+      'child-comment': comment.parentId && !isOnUserLikesPage && !isReplying
+    }"
+  >
+    <ion-col (click)="onPlay()">
+      <ion-row class="comment-meta">
+        <span>
+          <p class="comment-username">{{ comment.username }}</p>
+        </span>
 
+        <span
+          ><small>{{ comment.createdAt | duration }}</small>
+        </span>
+      </ion-row>
+
+      <ion-row>
+        <ion-label class="ion-text-wrap">
+          <p class="comment-text">{{ comment.text }}</p>
+        </ion-label>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="1" class="item-icons">
       <span *ngIf="comment.recordingSrc">
         <ion-icon
           class="indicator-icon"
@@ -25,21 +38,6 @@
           color="primary"
         ></ion-icon>
       </span>
-
-      <span
-        ><small>{{ comment.createdAt | duration }}</small>
-      </span>
-    </ion-row>
-  </ion-col>
-
-  <ion-col
-    class="left-margin"
-    size="1"
-    [hidden]="isReplying || isOnUserLikesPage"
-    (click)="onReply()"
-  >
-    <span>
-      <ion-icon name="arrow-redo-outline" color="secondary"></ion-icon>
-    </span>
-  </ion-col>
-</ion-item>
+    </ion-col>
+  </ion-item>
+</ion-item-sliding>

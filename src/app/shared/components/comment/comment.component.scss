@@ -22,10 +22,6 @@
   border-bottom: 1px solid var(--ion-color-secondary, #fff);
 }
 
-.child-comment {
-  margin-left: 1.5rem;
-}
-
 .comment-meta {
   display: flex;
   justify-content: space-between;
@@ -33,6 +29,9 @@
   padding: 0.25rem;
 }
 
-.left-margin {
-  margin-left: 1rem;
+.item-icons {
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: flex-end;
+  justify-content: flex-end;
 }
