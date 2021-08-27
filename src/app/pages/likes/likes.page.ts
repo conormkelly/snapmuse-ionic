@@ -7,13 +7,13 @@ import { LikesService } from 'src/app/services/likes.service';
   templateUrl: './likes.page.html',
   styleUrls: ['./likes.page.scss'],
 })
-export class LikesPage implements OnInit {
+export class LikesPage {
   isLoading = true;
   likedComments: Comment[] = [];
 
   constructor(private likesService: LikesService) {}
 
-  async ngOnInit() {
+  async ionViewDidEnter() {
     // Make the API call
     try {
       const res = await this.likesService.getAllUserLikes();
