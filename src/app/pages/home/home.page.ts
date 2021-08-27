@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalMenuService } from '../../services/global-menu.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  constructor() {}
+  constructor(public globalMenuService: GlobalMenuService) {}
 
   ngOnInit() {}
 }

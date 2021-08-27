@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/Post';
 import { Comment } from '../../../models/Comment';
+import { GlobalMenuService } from '../../../services/global-menu.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -17,7 +18,8 @@ export class PostDetailPage implements OnInit {
 
   constructor(
     private postsService: PostsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public globalMenuService: GlobalMenuService
   ) {}
 
   ngOnInit() {

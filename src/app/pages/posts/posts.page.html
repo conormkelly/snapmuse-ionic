@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title class="snapmuse-title"> SnapMuse </ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      <ion-button (click)="globalMenuService.displayMenu()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

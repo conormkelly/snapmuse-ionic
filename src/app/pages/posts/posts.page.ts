@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PostsService } from '../../services/posts.service';
 import { Post } from '../../models/Post';
+import { GlobalMenuService } from '../../services/global-menu.service';
 
 @Component({
   selector: 'app-posts',
@@ -12,7 +13,10 @@ export class PostsPage implements OnInit, OnDestroy {
   posts: Post[] = [];
   private $postSubscription: Subscription;
 
-  constructor(private postsService: PostsService) {}
+  constructor(
+    private postsService: PostsService,
+    public globalMenuService: GlobalMenuService
+  ) {}
 
   ngOnInit() {
     this.$postSubscription = this.postsService
