@@ -2,12 +2,12 @@
   *ngIf="comment"
   [color]="isPlaying() ? 'light' : undefined"
   [ngClass]="{
-    'parent-comment': !comment.parentId && !isOnUserLikesPage(),
-    'child-comment': comment.parentId && !isOnUserLikesPage()
+    'parent-comment': !comment.parentId && !isOnUserLikesPage && !isReplying,
+    'child-comment': comment.parentId && !isOnUserLikesPage && !isReplying
   }"
 >
-  <ion-col>
-    <ion-row (click)="onPlay()">
+  <ion-col (click)="onPlay()">
+    <ion-row>
       <ion-label class="ion-text-wrap">
         <p class="comment-text">{{ comment.text }}</p>
       </ion-label>
@@ -18,48 +18,28 @@
         <p class="comment-username">{{ comment.username }}</p>
       </span>
 
-      <ion-icon
-        *ngIf="comment.recordingSrc && downloadState !== 'inProgress'"
-        (click)="onDownload()"
-        class="action-icon"
-        [color]="
-          downloadState === 'none'
-            ? 'secondary'
-            : downloadState === 'complete'
-            ? 'success'
-            : 'warning'
-        "
-        [name]="comment.recordingSrc ? 'cloud-download-outline' : undefined"
-        size="medium"
-      ></ion-icon>
-
-      <ion-spinner
-        color="secondary"
-        class="action-icon"
-        *ngIf="downloadState === 'inProgress'"
-        name="dots"
-      ></ion-spinner>
-
-      <ion-icon
-        (click)=onToggleLiked()
-        *ngIf="comment.recordingSrc"
-        class="action-icon"
-        [color]="comment.isLiked ? 'danger' : 'secondary'"
-        [name]="comment.isLiked ? 'heart' : 'heart-outline'"
-        size="medium"
-      ></ion-icon>
+      <span *ngIf="comment.recordingSrc">
+        <ion-icon
+          class="indicator-icon"
+          name="musical-notes-outline"
+          color="primary"
+        ></ion-icon>
+      </span>
 
       <span
         ><small>{{ comment.createdAt | duration }}</small>
       </span>
-
-      <span [hidden]="isReplying || comment.parentId || isOnUserLikesPage()">
-        <ion-icon
-          (click)="onReply()"
-          name="arrow-redo-outline"
-          color="secondary"
-        ></ion-icon>
-      </span>
     </ion-row>
+  </ion-col>
+
+  <ion-col
+    class="left-margin"
+    size="1"
+    [hidden]="isReplying || isOnUserLikesPage"
+    (click)="onReply()"
+  >
+    <span>
+      <ion-icon name="arrow-redo-outline" color="secondary"></ion-icon>
+    </span>
   </ion-col>
 </ion-item>

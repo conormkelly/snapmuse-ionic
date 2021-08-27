@@ -12,6 +12,36 @@
         <ion-row class="song-user">{{ comment.username }}</ion-row>
       </ion-col>
 
+      <!-- Download -->
+      <ion-col size="2">
+        <ion-button
+          fill="clear"
+          (click)="onDownload()"
+          [disabled]="downloadState === 'inProgress'"
+        >
+          <ion-icon
+            *ngIf="downloadState !== 'inProgress'"
+            class="action-icon"
+            [color]="
+              downloadState === 'none'
+                ? 'secondary'
+                : downloadState === 'complete'
+                ? 'success'
+                : 'warning'
+            "
+            name="cloud-download-outline"
+            size="large"
+          ></ion-icon>
+
+          <ion-spinner
+            color="secondary"
+            class="action-icon"
+            *ngIf="downloadState === 'inProgress'"
+            name="dots"
+          ></ion-spinner>
+        </ion-button>
+      </ion-col>
+
       <!-- Like -->
       <ion-col size="2">
         <ion-button (click)="onToggleLike()" [disabled]="!audio" fill="clear">

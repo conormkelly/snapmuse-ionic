@@ -14,7 +14,11 @@
 
   <app-add-comment
     [postId]="originalComment.postId"
-    [parentId]="originalComment.id"
+    [parentId]="
+      originalComment.parentId === null
+        ? originalComment.id
+        : originalComment.parentId
+    "
     (commentAdded)="onAddComment($event)"
   ></app-add-comment>
 </ion-content>

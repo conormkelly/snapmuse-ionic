@@ -1,3 +1,5 @@
+import { saveAs } from 'file-saver';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,6 +10,7 @@ import { Post } from '../models/Post';
 
 import { AudioService, AudioState } from '../services/audio.service';
 import { LikesService } from '../services/likes.service';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-player',
@@ -20,10 +23,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public comment: Comment;
   public post: Post;
   public playbackState: AudioState;
+  downloadState = 'none';
 
   constructor(
     private router: Router,
     private audioService: AudioService,
+    private postsService: PostsService,
     private likesService: LikesService
   ) {}
 
@@ -44,6 +49,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   onPause() {
     this.audioService.pause(this.comment);
+  }
+
+  async onDownload() {
+    if (this.downloadState === 'none') {
+      const post = await this.postsService.getPostById(this.comment.postId);
+      this.downloadState = 'inProgress';
+      this.audioService.downloadFile(this.comment.id).subscribe((blob) => {
+        this.downloadState = 'complete';
+        saveAs(
+          blob,
+          `${post.title}-${this.comment.username}.mp3`.toLocaleLowerCase()
+        );
+      });
+    }
   }
 
   async onToggleLike() {

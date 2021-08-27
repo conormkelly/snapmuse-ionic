@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Liked</ion-title>
+    <ion-title>Likes</ion-title>
     <ion-buttons slot="start">
       <ion-back-button
         [text]="getBackButtonText()"
@@ -15,13 +15,13 @@
   <ion-spinner *ngIf="isLoading"></ion-spinner>
 
   <ion-list *ngIf="!isLoading && likedComments.length">
-    <app-comment *ngFor="let likedComment of likedComments" [comment]="likedComment"></app-comment>
+    <app-comment
+      *ngFor="let likedComment of likedComments"
+      [comment]="likedComment"
+    ></app-comment>
   </ion-list>
 
-  <p *ngIf="!isLoading && !likedComments.length">
-    There's nothing here!
-  </p>
+  <p *ngIf="!isLoading && !likedComments.length">There's nothing here!</p>
 
   <!-- TODO: handle error -->
-  
 </ion-content>
