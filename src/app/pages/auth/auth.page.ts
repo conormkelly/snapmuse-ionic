@@ -39,7 +39,8 @@ export class AuthPage implements OnInit {
           [
             Validators.required,
             Validators.minLength(4),
-            Validators.pattern('^[a-zA-Z0-9_-]+$'),
+            Validators.maxLength(20),
+            Validators.pattern('^[a-zA-Z0-9]+$'),
           ],
         ],
         password: [
@@ -67,7 +68,8 @@ export class AuthPage implements OnInit {
           [
             Validators.required,
             Validators.minLength(4),
-            Validators.pattern('^[a-zA-Z0-9_-]+$'),
+            Validators.maxLength(20),
+            Validators.pattern('^[a-zA-Z0-9]+$'),
           ],
         ],
         password: [
