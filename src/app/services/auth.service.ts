@@ -18,18 +18,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register({ username, password }): Observable<any> {
+  register({ username, password }): any {
     const url = `${this.apiBaseUrl}/auth/register`;
     return this.http
       .post<any>(url, { username, password }, this.httpHeader)
-      .pipe(tap(this.storeToken));
+      .pipe(tap(this.storeToken))
+      .toPromise();
   }
 
-  login({ username, password }): Observable<any> {
+  login({ username, password }): any {
     const url = `${this.apiBaseUrl}/auth/login`;
     return this.http
       .post<any>(url, { username, password }, this.httpHeader)
-      .pipe(tap(this.storeToken));
+      .pipe(tap(this.storeToken))
+      .toPromise();
   }
 
   logout() {
@@ -37,7 +39,8 @@ export class AuthService {
     const url = `${this.apiBaseUrl}/auth/logout`;
     return this.http
       .post<any>(url, {}, this.httpHeader)
-      .pipe(tap(this.storeToken));
+      .pipe(tap(this.storeToken))
+      .toPromise();
   }
 
   private storeToken({ data }) {

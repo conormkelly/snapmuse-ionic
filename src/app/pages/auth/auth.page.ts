@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthValidator } from './password.validator';
 
 import { AuthService } from '../../services/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-auth',
@@ -17,6 +18,7 @@ export class AuthPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private toastController: ToastController,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -90,31 +92,23 @@ export class AuthPage implements OnInit {
     return mode === 'ios' ? 'Home' : '';
   }
 
-  onSubmit() {
-    if (this.isRegistering) {
-      this.onRegister();
-    } else {
-      this.onLogin();
+  async onSubmit() {
+    try {
+      if (this.isRegistering) {
+        await this.authService.register(this.userDetails.value);
+      } else {
+        await this.authService.login(this.userDetails.value);
+      }
+      this.router.navigateByUrl('/posts');
+    } catch (res) {
+      const toast = await this.toastController.create({
+        message: res?.error.message
+          ? res.error.message
+          : 'Something went wrong. Please try again.',
+        duration: 3000,
+        color: 'danger',
+      });
+      toast.present();
     }
-  }
-
-  onRegister() {
-    this.authService.register(this.userDetails.value).subscribe((response) => {
-      if (response.status !== 401) {
-        this.router.navigateByUrl('/posts');
-      } else {
-        console.log('ERROR REGISTERING!');
-      }
-    });
-  }
-
-  onLogin() {
-    this.authService.login(this.userDetails.value).subscribe((response) => {
-      if (response.status !== 401) {
-        this.router.navigateByUrl('/posts');
-      } else {
-        console.log('ERROR LOGGING IN!');
-      }
-    });
   }
 }
