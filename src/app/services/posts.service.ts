@@ -73,6 +73,6 @@ export class PostsService {
     formData.append('parentId', parentId);
     formData.append('audio', audioFile);
     formData.append('text', text);
-    return this.http.post<any>(url, formData);
+    return this.http.post<any>(url, formData).toPromise();
   }
 }
