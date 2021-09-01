@@ -87,16 +87,18 @@ export class AudioService {
     }
   }
 
-  downloadFile(commentId): Observable<any> {
+  downloadFile(commentId) {
     // TODO: fix hardcoded url - this is only working right now because
     // the backend is not verifying the post id, just commentId
     const url = `${environment.apiBaseUrl}/posts/123/comments/${commentId}/audio`;
-    return this.http.get(url, {
-      responseType: 'blob',
-      headers: {
-        'Content-Disposition': 'attachment',
-      },
-    });
+    return this.http
+      .get(url, {
+        responseType: 'blob',
+        headers: {
+          'Content-Disposition': 'attachment',
+        },
+      })
+      .toPromise();
   }
 
   public getAudioSubscription(): Observable<AudioData> {

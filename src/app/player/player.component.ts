@@ -1,5 +1,6 @@
 import { saveAs } from 'file-saver';
 
+import { ToastController } from '@ionic/angular';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -29,7 +30,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     private router: Router,
     private audioService: AudioService,
     private postsService: PostsService,
-    private likesService: LikesService
+    private likesService: LikesService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -52,16 +54,26 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   async onDownload() {
-    if (this.downloadState === 'none') {
-      const post = await this.postsService.getPostById(this.comment.postId);
-      this.downloadState = 'inProgress';
-      this.audioService.downloadFile(this.comment.id).subscribe((blob) => {
+    try {
+      if (this.downloadState === 'none') {
+        const post = await this.postsService.getPostById(this.comment.postId);
+        this.downloadState = 'inProgress';
+        const blob = await this.audioService.downloadFile(this.comment.id);
         this.downloadState = 'complete';
         saveAs(
           blob,
           `${post.title}-${this.comment.username}.mp3`.toLocaleLowerCase()
         );
+      }
+    } catch (errRes) {
+      const toast = await this.toastController.create({
+        message: errRes?.error.message
+          ? errRes.error.message
+          : 'Something went wrong. Please try again.',
+        duration: 3000,
+        color: 'danger',
       });
+      toast.present();
     }
   }
 
