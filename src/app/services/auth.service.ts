@@ -18,29 +18,32 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register({ username, password }): any {
+  async register({ username, password }) {
     const url = `${this.apiBaseUrl}/auth/register`;
-    return this.http
+    const response = await this.http
       .post<any>(url, { username, password }, this.httpHeader)
-      .pipe(tap(this.storeToken))
       .toPromise();
+    this.storeToken(response);
+    return response;
   }
 
-  login({ username, password }): any {
+  async login({ username, password }) {
     const url = `${this.apiBaseUrl}/auth/login`;
-    return this.http
+    const response = await this.http
       .post<any>(url, { username, password }, this.httpHeader)
-      .pipe(tap(this.storeToken))
       .toPromise();
+    this.storeToken(response);
+    return response;
   }
 
-  logout() {
+  async logout() {
     localStorage.removeItem('snapmuse_token');
     const url = `${this.apiBaseUrl}/auth/logout`;
-    return this.http
+    const response = await this.http
       .post<any>(url, {}, this.httpHeader)
-      .pipe(tap(this.storeToken))
       .toPromise();
+    this.storeToken(response);
+    return response;
   }
 
   private storeToken({ data }) {
