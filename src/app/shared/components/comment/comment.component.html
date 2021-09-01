@@ -4,18 +4,20 @@
     <ion-item-option (click)="onReply()"> Reply </ion-item-option>
   </ion-item-options>
 
-  <ion-item
-    *ngIf="comment"
-    [color]="isPlaying() ? 'light' : undefined"
-    [ngClass]="{
-      'parent-comment': !comment.parentId && !isOnUserLikesPage && !isReplying,
-      'child-comment': comment.parentId && !isOnUserLikesPage && !isReplying
-    }"
-  >
+  <ion-item *ngIf="comment" [color]="isPlaying() ? 'light' : undefined">
     <ion-col (click)="onPlay()">
       <ion-row class="comment-meta">
         <span>
           <p class="comment-username">{{ comment.username }}</p>
+        </span>
+
+        <span>
+          <ion-icon
+            class="indicator-icon"
+            [name]="comment.isLiked ? 'heart' : 'heart-outline'"
+            [color]="comment.isLiked ? 'danger' : 'secondary'"
+            (click)="onToggleLike()"
+          ></ion-icon>
         </span>
 
         <span *ngIf="comment.recordingSrc">
