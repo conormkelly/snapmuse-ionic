@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { PostsService } from '../../services/posts.service';
 import { Post } from '../../models/Post';
@@ -15,15 +16,26 @@ export class PostsPage implements OnInit, OnDestroy {
 
   constructor(
     private postsService: PostsService,
-    public globalMenuService: GlobalMenuService
+    public globalMenuService: GlobalMenuService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
-    this.$postSubscription = this.postsService
-      .getPostsListener()
-      .subscribe((posts) => {
+    this.$postSubscription = this.postsService.getPostsListener().subscribe(
+      (posts) => {
         this.posts = posts;
-      });
+      },
+      async (err) => {
+        const toast = await this.toastController.create({
+          message: err?.error.message
+            ? err.error.message
+            : 'Something went wrong. Please try again.',
+          duration: 3000,
+          color: 'danger',
+        });
+        toast.present();
+      }
+    );
     this.postsService.getAllPosts();
   }
 
@@ -31,9 +43,12 @@ export class PostsPage implements OnInit, OnDestroy {
     this.$postSubscription.unsubscribe();
   }
 
-  refresh(ev) {
-    this.postsService.getAllPosts().then((wasSuccessful) => {
-      ev.detail.complete();
-    });
+  async refresh(ev) {
+    try {
+      await this.postsService.getAllPosts();
+    } catch (err) {
+      console.log('Error refreshing.');
+    }
+    ev.detail.complete();
   }
 }
