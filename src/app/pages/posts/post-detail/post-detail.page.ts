@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/Post';
 import { Comment } from '../../../models/Comment';
@@ -19,7 +20,8 @@ export class PostDetailPage implements OnInit {
   constructor(
     private postsService: PostsService,
     private activatedRoute: ActivatedRoute,
-    public globalMenuService: GlobalMenuService
+    public globalMenuService: GlobalMenuService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -39,6 +41,14 @@ export class PostDetailPage implements OnInit {
       this.comments = response.data;
     } catch (err) {
       this.isLoading = false;
+      const toast = await this.toastController.create({
+        message: err?.error.message
+          ? err.error.message
+          : 'Something went wrong. Please try again.',
+        duration: 3000,
+        color: 'danger',
+      });
+      toast.present();
     }
   }
 
@@ -56,7 +66,6 @@ export class PostDetailPage implements OnInit {
    * child `app-add-comment` component.
    */
   onAddComment(comment: Comment) {
-    // TODO: handle pushing it to correct place
     this.comments.push(comment);
   }
 
