@@ -12,26 +12,23 @@
 
 <ion-content class="auth-form">
   <form [formGroup]="userDetails" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label>Username</ion-label>
+    <ion-item class="auth-form-input">
+      <ion-label position="floating">Username</ion-label>
       <ion-input type="text" formControlName="username"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Password</ion-label>
+    <ion-item class="auth-form-input">
+      <ion-label position="floating">Password</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
 
-    <ion-item *ngIf="isRegistering">
-      <ion-label>Confirm Password</ion-label>
+    <ion-item *ngIf="isRegistering" class="auth-form-input">
+      <ion-label position="floating">Confirm Password</ion-label>
       <ion-input type="password" formControlName="confirmPassword"></ion-input>
     </ion-item>
 
-    <ion-button
-      type="submit"
-      [disabled]="!userDetails.valid"
-      expand="block"
-      >Submit</ion-button
-    >
+    <ion-button type="submit" [disabled]="!userDetails.valid" expand="block">
+      Submit
+    </ion-button>
   </form>
 </ion-content>

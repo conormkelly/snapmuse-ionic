@@ -1,0 +1,12 @@
+.auth-form {
+    form {
+      display: grid;
+      place-content: center;
+      margin-top: 2rem;
+      padding: 1rem;
+  
+      .auth-form-input {
+        margin-bottom: 1rem;
+      }
+    }
+}
