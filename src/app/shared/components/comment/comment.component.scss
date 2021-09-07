@@ -4,12 +4,11 @@
 }
 
 .comment-text {
-  color: var(--ion-color-step-950, #fff);
+  color: var(--ion-color-light-contrast, #fff);
   padding: 0.25rem;
 }
 
 .comment-username {
-  font-size: 1rem;
   color: var(--ion-color-medium, #fff);
 }
 
@@ -27,6 +26,34 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.25rem;
+
+  .comment-meta-header-text {
+    display: flex;
+    align-items: center;
+
+    .comment-username {
+      margin-right: 0.5rem;
+      color: var(--ion-color-medium, #fff);
+      font-size: 0.8rem;
+    }
+
+    .comment-created {
+      font-size: 0.8rem;
+    }
+  }
+
+  .comment-meta-header-icons {
+    display: flex;
+    align-items: center;
+
+    .comment-meta-header-icon {
+      display: flex;
+    }
+
+    .comment-meta-song {
+      margin-right: 0.5rem;
+    }
+  }
 }
 
 .item-icons {

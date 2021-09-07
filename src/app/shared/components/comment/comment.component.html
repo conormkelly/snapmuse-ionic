@@ -7,30 +7,30 @@
   <ion-item *ngIf="comment" [color]="isPlaying() ? 'light' : undefined">
     <ion-col (click)="onPlay()">
       <ion-row class="comment-meta">
-        <span>
-          <p class="comment-username">{{ comment.username }}</p>
-        </span>
+        <div class="comment-meta-header-text">
+          <h2 class="comment-username">{{ comment.username }}</h2>
 
-        <span>
-          <ion-icon
-            class="indicator-icon"
-            [name]="comment.isLiked ? 'heart' : 'heart-outline'"
-            [color]="comment.isLiked ? 'danger' : 'secondary'"
-            (click)="onToggleLike()"
-          ></ion-icon>
-        </span>
+          <h3 class="comment-created">{{ comment.createdAt | duration }}</h3>
+        </div>
 
-        <span *ngIf="comment.recordingSrc">
-          <ion-icon
-            class="indicator-icon"
-            name="musical-notes-outline"
-            color="primary"
-          ></ion-icon>
-        </span>
+        <div class="comment-meta-header-icons">
+          <span *ngIf="comment.recordingSrc" class="comment-meta-song">
+            <ion-icon
+              class="indicator-icon"
+              name="musical-notes-outline"
+              color="primary"
+            ></ion-icon>
+          </span>
 
-        <span
-          ><small>{{ comment.createdAt | duration }}</small>
-        </span>
+          <div class="comment-meta-header-icon">
+            <ion-icon
+              class="indicator-icon"
+              [name]="comment.isLiked ? 'heart' : 'heart-outline'"
+              [color]="comment.isLiked ? 'danger' : 'secondary'"
+              (click)="onToggleLike()"
+            ></ion-icon>
+          </div>
+        </div>
       </ion-row>
 
       <ion-row>

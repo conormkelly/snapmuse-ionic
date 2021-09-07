@@ -11,6 +11,6 @@ import { DurationPipe } from '../pipes/duration.pipe';
 @NgModule({
   declarations: [CommentComponent, AddCommentComponent, DurationPipe],
   imports: [CommonModule, FormsModule, IonicModule],
-  exports: [CommentComponent, AddCommentComponent, DurationPipe],
+  exports: [CommentComponent, AddCommentComponent, DurationPipe, FormsModule],
 })
 export class SharedModule {}
