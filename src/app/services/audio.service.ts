@@ -88,7 +88,8 @@ export class AudioService {
   }
 
   downloadFile(commentId) {
-    const url = `${environment.apiBaseUrl}/audio/${commentId}`;
+    // TODO: fix this endpoint in the API... it should not be in /posts
+    const url = `${environment.apiBaseUrl}/posts/audio/${commentId}`;
     return this.http
       .get(url, {
         responseType: 'blob',

@@ -1,79 +1,84 @@
 <ion-toolbar *ngIf="audio" color="primary" padding>
-  <ion-grid>
-    <ion-row id="media-controls">
-      <ion-col size="2">
-        <ion-thumbnail (click)="onClickThumbnail()">
-          <ion-img class="image-thumbnail" [src]="post.imageSrc"></ion-img>
-        </ion-thumbnail>
-      </ion-col>
+  <ion-row class="media-controls" id="media-controls">
+    <ion-col size="2">
+      <ion-thumbnail (click)="onClickThumbnail()">
+        <ion-img class="image-thumbnail" [src]="post.imageSrc"></ion-img>
+      </ion-thumbnail>
+    </ion-col>
 
-      <ion-col size="4">
-        <ion-row class="song-title">{{ post.title }}</ion-row>
-        <ion-row class="song-user">{{ comment.username }}</ion-row>
-      </ion-col>
+    <ion-col size="2" class="song-info">
+      <ion-row class="song-title">{{ post.title }}</ion-row>
+      <ion-row class="song-user">{{ comment.username }}</ion-row>
+    </ion-col>
 
-      <!-- Download -->
-      <ion-col size="2">
-        <ion-button
-          fill="clear"
-          (click)="onDownload()"
-          [disabled]="downloadState === 'inProgress'"
-        >
-          <ion-icon
-            *ngIf="downloadState !== 'inProgress'"
-            class="action-icon"
-            [color]="
-              downloadState === 'none'
-                ? 'secondary'
-                : downloadState === 'complete'
-                ? 'success'
-                : 'warning'
-            "
-            name="cloud-download-outline"
-            size="large"
-          ></ion-icon>
+    <ion-col size="4">
+      <progress
+        class="song-progress"
+        [max]="audioLength"
+        [value]="audioTime"
+      ></progress>
+    </ion-col>
 
-          <ion-spinner
-            color="secondary"
-            class="action-icon"
-            *ngIf="downloadState === 'inProgress'"
-            name="dots"
-          ></ion-spinner>
-        </ion-button>
-      </ion-col>
+    <!-- Download -->
+    <ion-col size="1">
+      <ion-button
+        fill="clear"
+        (click)="onDownload()"
+        [disabled]="downloadState === 'inProgress'"
+      >
+        <ion-icon
+          *ngIf="downloadState !== 'inProgress'"
+          class="action-icon"
+          [color]="
+            downloadState === 'none'
+              ? 'secondary'
+              : downloadState === 'complete'
+              ? 'success'
+              : 'warning'
+          "
+          name="cloud-download-outline"
+          size="medium"
+        ></ion-icon>
 
-      <!-- Like -->
-      <ion-col size="2">
-        <ion-button (click)="onToggleLike()" [disabled]="!audio" fill="clear">
-          <ion-icon
-            class="heart-icon"
-            [color]="comment.isLiked ? 'danger' : 'secondary'"
-            [name]="comment.isLiked ? 'heart' : 'heart-outline'"
-            size="large"
-          ></ion-icon>
-        </ion-button>
-      </ion-col>
+        <ion-spinner
+          color="secondary"
+          class="action-icon"
+          *ngIf="downloadState === 'inProgress'"
+          name="dots"
+        ></ion-spinner>
+      </ion-button>
+    </ion-col>
 
-      <ion-col size="2">
-        <!-- Play -->
-        <ion-button
-          *ngIf="playbackState === 'Paused'"
-          [disabled]="!audio"
-          (click)="onPlay()"
-          fill="clear"
-        >
-          <ion-icon color="secondary" size="large" name="play"></ion-icon>
-        </ion-button>
+    <!-- Like -->
+    <ion-col size="1">
+      <ion-button (click)="onToggleLike()" [disabled]="!audio" fill="clear">
+        <ion-icon
+          class="heart-icon"
+          [color]="comment.isLiked ? 'danger' : 'secondary'"
+          [name]="comment.isLiked ? 'heart' : 'heart-outline'"
+          size="medium"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
 
-        <!-- Pause -->
-        <ion-button
-          *ngIf="playbackState === 'Playing'"
-          (click)="onPause()"
-          fill="clear"
-        >
-          <ion-icon color="secondary" size="large" name="pause"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-col size="2">
+      <!-- Play -->
+      <ion-button
+        *ngIf="playbackState === 'Paused'"
+        [disabled]="!audio"
+        (click)="onPlay()"
+        fill="clear"
+      >
+        <ion-icon color="secondary" size="medium" name="play"></ion-icon>
+      </ion-button>
+      <!-- Pause -->
+      <ion-button
+        *ngIf="playbackState === 'Playing'"
+        (click)="onPause()"
+        fill="clear"
+      >
+        <ion-icon color="secondary" size="medium" name="pause"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-toolbar>

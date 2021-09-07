@@ -25,6 +25,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public post: Post;
   public playbackState: AudioState;
   downloadState = 'none';
+  public audioTime = 0;
+  public audioLength;
 
   constructor(
     private router: Router,
@@ -42,6 +44,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.audio = audioData.audio;
         this.comment = audioData.comment;
         this.post = audioData.post;
+        this.audioLength = this.audio.duration;
+
+        this.audio.ontimeupdate = () => {
+          this.audioTime = this.audio.currentTime;
+        };
       });
   }
 
