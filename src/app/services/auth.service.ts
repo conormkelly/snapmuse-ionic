@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
@@ -38,12 +36,6 @@ export class AuthService {
 
   async logout() {
     localStorage.removeItem('snapmuse_token');
-    const url = `${this.apiBaseUrl}/auth/logout`;
-    const response = await this.http
-      .post<any>(url, {}, this.httpHeader)
-      .toPromise();
-    this.storeToken(response);
-    return response;
   }
 
   private storeToken({ data }) {

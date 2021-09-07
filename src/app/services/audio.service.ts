@@ -88,9 +88,7 @@ export class AudioService {
   }
 
   downloadFile(commentId) {
-    // TODO: fix hardcoded url - this is only working right now because
-    // the backend is not verifying the post id, just commentId
-    const url = `${environment.apiBaseUrl}/posts/123/comments/${commentId}/audio`;
+    const url = `${environment.apiBaseUrl}/audio/${commentId}`;
     return this.http
       .get(url, {
         responseType: 'blob',
