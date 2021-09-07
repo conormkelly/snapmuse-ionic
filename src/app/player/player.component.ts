@@ -24,7 +24,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public comment: Comment;
   public post: Post;
   public playbackState: AudioState;
-  downloadState = 'none';
+  public downloadState = 'none';
   public audioTime = 0;
   public audioLength;
 
@@ -40,6 +40,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.audio$ = this.audioService
       .getAudioSubscription()
       .subscribe((audioData) => {
+        // If the track has changed, reset the download state
+        if (this.comment?.recordingSrc !== audioData.comment.recordingSrc) {
+          this.downloadState = 'none';
+        }
+
         this.playbackState = audioData.state;
         this.audio = audioData.audio;
         this.comment = audioData.comment;

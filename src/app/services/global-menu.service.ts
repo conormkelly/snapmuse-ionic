@@ -31,7 +31,6 @@ export class GlobalMenuService {
           text: 'Logout',
           icon: 'log-out-outline',
           handler: async () => {
-            // TODO: make promise
             await this.authService.logout();
             await this.router.navigateByUrl('/');
             window.location.reload();
