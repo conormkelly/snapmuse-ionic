@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Zen+Loop&display=swap');
 
+.home-actions {
+    max-width: 400px;
+    padding: 0 3rem;
+}
+
 .snapmuse-logo {
     width: 125px;
     height: 125px;
@@ -15,10 +20,6 @@ p {
     text-align: center;
 }
 
-
-.margin-top {
-    margin-top: 4rem;
-}
 
 .text-center {
     text-align: center;
