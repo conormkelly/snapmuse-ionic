@@ -11,7 +11,7 @@
       <ion-row class="song-user">{{ comment.username }}</ion-row>
     </ion-col>
 
-    <ion-col size="4">
+    <ion-col size="2">
       <progress
         class="song-progress"
         [max]="audioLength"
@@ -20,7 +20,7 @@
     </ion-col>
 
     <!-- Download -->
-    <ion-col size="1">
+    <ion-col size="2">
       <ion-button
         fill="clear"
         (click)="onDownload()"
@@ -50,7 +50,7 @@
     </ion-col>
 
     <!-- Like -->
-    <ion-col size="1">
+    <ion-col size="2">
       <ion-button (click)="onToggleLike()" [disabled]="!audio" fill="clear">
         <ion-icon
           class="heart-icon"
